@@ -86,9 +86,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
-  locale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'ka') | ('en' | 'ka')[];
+  globals: {
+    'home-view': HomeView;
+  };
+  globalsSelect: {
+    'home-view': HomeViewSelect<false> | HomeViewSelect<true>;
+  };
+  locale: 'en' | 'ka';
   user: User & {
     collection: 'users';
   };
@@ -140,12 +145,15 @@ export interface User {
   password?: string | null;
 }
 /**
+ * ატვირთეთ სურათები თქვენი საიტისთვის
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
   id: string;
   alt: string;
+  _key?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -260,6 +268,7 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  _key?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -311,6 +320,26 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-view".
+ */
+export interface HomeView {
+  id: string;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-view_select".
+ */
+export interface HomeViewSelect<T extends boolean = true> {
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

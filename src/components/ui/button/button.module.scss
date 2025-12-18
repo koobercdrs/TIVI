@@ -1,0 +1,22 @@
+@use '../../../styles/mixins.scss' as *;
+
+.button {
+  @include regular-b;
+
+  width: 160px;
+  height: 48px;
+  padding: 12px 32px;
+
+  border-top-right-radius: 24px;
+  border-bottom-left-radius: 24px;
+
+  &.primary {
+    background: var(--red-100);
+    color: var(--white-200);
+  }
+
+  &.secondary {
+    background: var(--white-200);
+    color: var(--blue-300);
+  }
+}

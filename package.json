@@ -32,7 +32,8 @@
     "payload": "3.68.5",
     "react": "19.2.1",
     "react-dom": "19.2.1",
-    "sharp": "0.34.2"
+    "sharp": "0.34.2",
+    "swiper": "^12.0.3"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

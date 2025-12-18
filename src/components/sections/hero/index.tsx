@@ -36,6 +36,16 @@ export const Hero = () => {
           <Image src="/icons/left-arrow.svg" alt="left arrow" width={12} height={24} />
         </button>
 
+        <div className={styles.dots}>
+          {imgs.map((_, index) => (
+            <span
+              key={index}
+              onClick={() => swiperInstance?.slideToLoop(index)}
+              className={activeIndex == index ? styles.active : ''}
+            />
+          ))}
+        </div>
+
         <button onClick={() => swiperInstance?.slideNext()} className={styles.arrow}>
           <Image src="/icons/right-arrow.svg" alt="right arrow" width={12} height={24} />
         </button>

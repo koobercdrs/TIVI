@@ -1,0 +1,83 @@
+@use '../../../styles/mixins.scss' as *;
+
+.section {
+  position: relative;
+  width: 100%;
+
+  padding: 96px 0 48px;
+
+  .background {
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    @media screen and (max-width: 960px) {
+      gap: 24px;
+    }
+
+    .title {
+      @include header-s;
+
+      @media screen and (max-width: 960px) {
+        font-size: 36px;
+        line-height: 48px;
+      }
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 96px;
+
+      @media screen and (max-width: 1200px) {
+        gap: 32px;
+      }
+
+      .card {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+
+        img {
+          width: 100%;
+          height: auto;
+          aspect-ratio: 384 / 320;
+          border-radius: 24px;
+        }
+
+        .title {
+          @include subheader-m;
+          margin-top: 16px;
+
+          @media screen and (max-width: 960px) {
+            font-size: 24px;
+            line-height: 36px;
+          }
+
+          @media screen and (max-width: 400px) {
+            font-size: 20px;
+            line-height: 24px;
+          }
+        }
+
+        .text {
+          @include regular-b;
+          margin: 8px 0 24px;
+
+          @media screen and (max-width: 960px) {
+            font-size: 12px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+  }
+}

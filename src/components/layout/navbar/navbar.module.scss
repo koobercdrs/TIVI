@@ -1,0 +1,64 @@
+@use '../../../styles/mixins.scss' as *;
+
+.header {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+
+  user-select: none;
+  width: 100%;
+
+  .navbar {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    padding-block: 16px;
+
+    .logo {
+      width: 96px;
+      height: 40px;
+      flex-shrink: 0;
+      object-fit: cover;
+    }
+
+    .ul {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+
+      .link {
+        @include regular-b;
+        text-wrap: nowrap;
+
+        &.active {
+          position: relative;
+
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+
+          &::before {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--white-200);
+          }
+        }
+      }
+    }
+
+    .right {
+      justify-self: end;
+
+      .socials {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+    }
+  }
+}

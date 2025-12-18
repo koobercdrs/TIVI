@@ -8,6 +8,7 @@ $mobile: 480px;
   font-weight: 400;
   line-height: 92px;
   letter-spacing: 0.02em;
+  color: var(--white-100);
 
   @media screen and (max-width: $desktop) {
     font-size: 36px;
@@ -25,6 +26,7 @@ $mobile: 480px;
   line-height: 64px;
   text-align: center;
   letter-spacing: -0.04em;
+  color: var(--white-100);
 
   @media screen and (max-width: $desktop) {
     font-size: 36px;
@@ -38,12 +40,14 @@ $mobile: 480px;
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
+  color: var(--white-100);
 }
 
 @mixin subheader-xs {
   font-size: 20px;
   font-weight: 400;
   line-height: 24px;
+  color: var(--white-200);
 
   @media screen and (max-width: $tablet) {
     font-size: 14px;
@@ -57,6 +61,7 @@ $mobile: 480px;
   line-height: 48px;
   text-align: center;
   letter-spacing: 0.02em;
+  color: var(--white-100);
 
   @media screen and (max-width: $desktop) {
     font-size: 24px;
@@ -72,6 +77,7 @@ $mobile: 480px;
 
 @mixin subheader-s {
   font-family: var(--font-secondary);
+  color: var(--white-100);
   letter-spacing: 0.04em;
   line-height: 28px;
   font-weight: 500;
@@ -99,6 +105,7 @@ $mobile: 480px;
   line-height: 24px;
   text-align: center;
   letter-spacing: 0.02em;
+  color: var(--white-200);
 
   @media screen and (max-width: $desktop) {
     font-weight: 600;
@@ -109,10 +116,11 @@ $mobile: 480px;
 
 @mixin regular {
   font-family: var(--font-secondary);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
+  color: var(--white-100);
   letter-spacing: 0.02em;
+  line-height: 24px;
+  font-weight: 400;
+  font-size: 16px;
 
   @media screen and (max-width: $tablet) {
     font-size: 13px;
@@ -125,13 +133,15 @@ $mobile: 480px;
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+  color: var(--white-100);
 }
 
 // Medium
 @mixin medium-b {
   font-family: var(--font-secondary);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 16px;
+  color: var(--white-100);
   letter-spacing: 0.02em;
+  line-height: 16px;
+  font-weight: 600;
+  font-size: 13px;
 }

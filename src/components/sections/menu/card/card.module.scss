@@ -1,0 +1,104 @@
+@use '../../../../styles/mixins.scss' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+
+  height: 50dvh;
+  width: 100%;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  &.left {
+    flex-direction: row-reverse;
+
+    @media screen and (max-width: 900px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+
+    padding-right: 32px;
+    overflow: auto;
+
+    height: 100%;
+    width: 50%;
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      max-height: 400px;
+    }
+
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+
+      border-bottom: 2px solid #fbffeb52;
+      padding-block: 20px;
+      cursor: pointer;
+
+      .info h1,
+      .info p,
+      .price {
+        transition: all 0.3s;
+      }
+
+      &:hover {
+        .info h1,
+        .info p,
+        .price {
+          color: var(--white-100);
+        }
+      }
+
+      &.selected {
+        .info h1,
+        .info p,
+        .price {
+          color: var(--white-100);
+        }
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+
+        h1 {
+          @include subheader-s;
+          color: var(--white-300);
+        }
+
+        p {
+          @include regular;
+          color: var(--white-500);
+        }
+      }
+
+      .price {
+        @include regular;
+        color: var(--white-500);
+      }
+    }
+  }
+
+  .banner {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+
+    @media screen and (max-width: 900px) {
+      width: 100%;
+    }
+  }
+}

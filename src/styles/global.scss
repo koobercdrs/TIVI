@@ -4,6 +4,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--white-100) var(--blue-300);
 }
 
 html {
@@ -13,6 +16,9 @@ html {
 body {
   font-family: var(--font-primary);
   background: var(--blue-100);
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--white-100) var(--blue-300);
 }
 
 a {
@@ -33,4 +39,31 @@ button {
 
 img {
   user-select: none;
+}
+
+/* Scrollbar width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #152229;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: #fbffeb;
+  border-radius: 10px;
+}
+
+/* Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fbffeb;
+  opacity: 0.8;
+}
+
+/* Remove scrollbar arrows */
+::-webkit-scrollbar-button {
+  display: none;
 }

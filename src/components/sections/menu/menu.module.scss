@@ -1,0 +1,19 @@
+@use '../../../styles/mixins.scss' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  padding-block: 48px;
+  gap: 96px;
+
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+
+    .title {
+      @include subheader-m;
+      text-align: center;
+    }
+  }
+}

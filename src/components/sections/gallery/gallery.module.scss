@@ -1,0 +1,119 @@
+@use '../../../styles/mixins.scss' as *;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  padding-block: 48px;
+
+  .filter {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 48px;
+
+    @media screen and (max-width: 480px) {
+      gap: 12px;
+    }
+
+    .filter_item {
+      @include subheader-xs;
+      color: var(--white-300);
+      transition: all 0.5s;
+      position: relative;
+      cursor: pointer;
+
+      @media screen and (max-width: 480px) {
+        font-size: 14px;
+        line-height: 24px;
+      }
+
+      &:hover {
+        color: var(--white-100);
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: -6px;
+
+        width: 100%;
+        height: 2px;
+        background: var(--red-100);
+
+        opacity: 0;
+        transition: all 0.5s;
+        transform: translateY(5px);
+      }
+
+      &.active {
+        color: var(--white-100);
+
+        &::before {
+          transform: translateY(0);
+          opacity: 100;
+        }
+      }
+    }
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    padding-block: 48px;
+    gap: 24px;
+
+    @media screen and (max-width: 1120px) {
+      gap: 16px;
+    }
+
+    @media screen and (max-width: 840px) {
+      display: flex;
+      flex-wrap: wrap;
+
+      padding-block: 0;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .banner {
+      border-radius: 12px;
+      overflow: hidden;
+
+      flex: 1;
+      flex-basis: 230px;
+
+      @media screen and (min-width: 840px) {
+        &:nth-child(7n + 3) {
+          grid-row: span 2;
+        }
+
+        &:nth-child(7n + 4) {
+          grid-row: span 2;
+        }
+
+        &:nth-child(7n + 6) {
+          grid-row: span 2;
+        }
+
+        &:nth-child(7n) {
+          grid-column: span 1;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
+}

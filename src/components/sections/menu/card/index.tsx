@@ -46,6 +46,7 @@ export const MenuCard = ({ data, side = 'left' }: IProps) => {
       <Image
         className={styles.banner}
         src={selectedMenu.banner}
+        draggable={false}
         height={560}
         alt="banner"
         width={696}

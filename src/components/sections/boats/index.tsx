@@ -1,11 +1,14 @@
-import { Dolphin } from './dolphin'
-import { Boat } from './boat'
+import { BoatCard } from './card'
 
 export const Boats = () => {
   return (
     <section>
-      <Dolphin />
-      <Boat />
+      <h1>Experience Boat Tours</h1>
+
+      <div>
+        <BoatCard />
+        <BoatCard />
+      </div>
     </section>
   )
 }

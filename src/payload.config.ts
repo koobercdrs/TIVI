@@ -10,8 +10,8 @@ import { LayoutView } from './payload/globals/layout-globals'
 import { HomeView } from './payload/globals/home-globals'
 
 import { Events } from './payload/collections/event'
-import { Media } from './payload/collections/Media'
-import { Users } from './payload/collections/Users'
+import { Media } from './payload/collections/media'
+import { Users } from './payload/collections/users'
 import { Menu } from './payload/collections/menu'
 
 const filename = fileURLToPath(import.meta.url)

@@ -11,7 +11,6 @@ import { Hero } from '@/components/sections/hero'
 
 import { getPayload } from '@/library/payload'
 import { ILang } from '@/types'
-import { Modal } from '@/components/ui/modal'
 
 const getData = cache(async (lang: ILang) => {
   try {
@@ -41,7 +40,6 @@ export default async function Home({ params }: { params: Promise<{ lang: ILang }
       <Boats content={content.boat_tours_section} />
       <Gallery content={content.gallery} />
       <Contact content={content.contact} />
-      {/* <Modal></Modal> */}
     </Fragment>
   )
 }

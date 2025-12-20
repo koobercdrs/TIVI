@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { HomeView } from '@/payload-types'
 import styles from './card.module.scss'
+import Link from 'next/link'
 
 export type IEvent = HomeView['events']['events_list'][0]
 
@@ -16,7 +17,9 @@ export const Card = ({ event }: { event: IEvent }) => {
 
       <p className={styles.text}>{event.text}</p>
 
-      <Button>See Details</Button>
+      <Link href="/en/event">
+        <Button>See Details</Button>
+      </Link>
     </div>
   )
 }

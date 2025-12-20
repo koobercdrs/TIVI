@@ -4,11 +4,11 @@ import localFont from 'next/font/local'
 
 import './../styles.scss'
 
+import { ModalProvider } from '@/context/events-context'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { getPayload } from '@/library/payload'
 import { ILang } from '@/types'
-import { ModalProvider } from '@/context/events-context'
 
 export const metadata = {
   title: 'TIVI',
@@ -35,10 +35,9 @@ const getData = cache(async (lang: ILang) => {
 interface IProps {
   params: Promise<{ lang: ILang }>
   children: ReactNode
-  modal: ReactNode
 }
 
-export default async function RootLayout({ children, params, modal }: IProps) {
+export default async function RootLayout({ children, params }: IProps) {
   const { lang } = await params
 
   const content = await getData(lang)
@@ -51,10 +50,7 @@ export default async function RootLayout({ children, params, modal }: IProps) {
         <main>
           <Navbar content={content.navbar} />
 
-          <ModalProvider>
-            {modal}
-            {children}
-          </ModalProvider>
+          <ModalProvider>{children}</ModalProvider>
 
           <Footer content={content.footer} />
         </main>

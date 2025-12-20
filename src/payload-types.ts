@@ -468,12 +468,10 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface HomeView {
   id: string;
   hero: {
-    images?:
-      | {
-          image: string | Media;
-          id?: string | null;
-        }[]
-      | null;
+    images: {
+      image: string | Media;
+      id?: string | null;
+    }[];
     title: string;
     subtitle: string;
     primary_btn: string;
@@ -510,16 +508,21 @@ export interface HomeView {
     }[];
   };
   about: {
-    images?:
-      | {
-          image: string | Media;
-          id?: string | null;
-        }[]
-      | null;
+    images: {
+      image: string | Media;
+      id?: string | null;
+    }[];
     title: string;
     subtitle: string;
   };
-  menu: string | Menu;
+  menu: {
+    name: string;
+    subname: string;
+    menu_list: {
+      menu: string | Menu;
+      id?: string | null;
+    }[];
+  };
   boat_tours: {
     type: 'left' | 'right';
     image: string | Media;
@@ -597,7 +600,7 @@ export interface HomeView {
        */
       address: string;
     };
-    social?: {
+    social: {
       /**
        * სრული URL მაგ: https://facebook.com/tivi
        */
@@ -771,7 +774,18 @@ export interface HomeViewSelect<T extends boolean = true> {
         title?: T;
         subtitle?: T;
       };
-  menu?: T;
+  menu?:
+    | T
+    | {
+        name?: T;
+        subname?: T;
+        menu_list?:
+          | T
+          | {
+              menu?: T;
+              id?: T;
+            };
+      };
   boat_tours?:
     | T
     | {

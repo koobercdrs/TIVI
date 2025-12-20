@@ -8,10 +8,10 @@ import { Button } from '@/components/ui/button'
 import styles from './hero.module.scss'
 
 import 'swiper/css'
+import { HomeView, Media } from '@/payload-types'
+import { getMedia } from '@/library/payload'
 
-const imgs = ['/images/hero-img-1.jpg', '/images/hero-img-2.jpg']
-
-export const Hero = () => {
+export const Hero = ({ content }: { content: HomeView['hero'] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -24,9 +24,9 @@ export const Hero = () => {
         onSwiper={(swiper) => setSwiperInstance(swiper)}
         onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
       >
-        {imgs.map((img, index) => (
+        {content.images.map((img, index) => (
           <SwiperSlide className={styles.slide} key={index}>
-            <Image src={img} alt="hero img" fill priority />
+            <Image src={getMedia(img.image as Media).url} alt="hero img" fill priority />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -37,7 +37,7 @@ export const Hero = () => {
         </button>
 
         <div className={styles.dots}>
-          {imgs.map((_, index) => (
+          {content.images.map((_, index) => (
             <span
               key={index}
               onClick={() => swiperInstance?.slideToLoop(index)}
@@ -53,23 +53,20 @@ export const Hero = () => {
 
       <div className={`${styles.wrapper} container`}>
         <div className={styles.content}>
-          <h1 className={styles.title}>Riverside Restaurant, Bar & Boat Tours in Tbilisi</h1>
+          <h1 className={styles.title}>{content.title}</h1>
 
           <div className={styles.left}>
-            <h1 className={styles.subtitle}>
-              TIVI is Tbilisi&apos;s riverside hub for dining, bar life, Mtkvari tours, and
-              birthday, corporate or engagement events.
-            </h1>
+            <h1 className={styles.subtitle}>{content.subtitle}</h1>
 
             <div className={styles.btns}>
-              <Button>Explore TIVI</Button>
-              <Button variant="secondary">Boat Tours</Button>
+              <Button>{content.primary_btn}</Button>
+              <Button variant="secondary">{content.secondary_btn}</Button>
             </div>
           </div>
         </div>
 
         <div className={styles.dots}>
-          {imgs.map((_, index) => (
+          {content.images.map((_, index) => (
             <span
               key={index}
               onClick={() => swiperInstance?.slideToLoop(index)}

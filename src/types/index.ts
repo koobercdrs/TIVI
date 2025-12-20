@@ -1,0 +1,1 @@
+export type ILang = "en" | "ka"

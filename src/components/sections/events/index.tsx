@@ -3,8 +3,9 @@ import Image from 'next/image'
 import styles from './events.module.scss'
 import { events } from '@/data'
 import { Card } from './card'
+import { HomeView } from '@/payload-types'
 
-export const Events = () => {
+export const Events = ({ content }: { content: HomeView['events'] }) => {
   return (
     <section id="EVENTS" className={styles.section}>
       <Image
@@ -17,7 +18,7 @@ export const Events = () => {
       />
 
       <div className={`${styles.content_wrapper} container`}>
-        <h1 className={styles.title}>Make Your Drean Event Come True</h1>
+        <h1 className={styles.title}>{content.section_title}</h1>
 
         <div className={styles.wrapper}>
           {events.map((event) => (

@@ -6,10 +6,10 @@ import Image from 'next/image'
 
 import styles from './about.module.scss'
 import { Button } from '@/components/ui/button'
+import { HomeView, Media } from '@/payload-types'
+import { getMedia } from '@/library/payload'
 
-const imgs = ['/images/hero-img-1.jpg', '/images/hero-img-2.jpg']
-
-export const About = () => {
+export const About = ({ content }: { content: HomeView['about'] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
   return (
@@ -20,29 +20,22 @@ export const About = () => {
         className={styles.swiper}
         onSwiper={(swiper) => setSwiperInstance(swiper)}
       >
-        {imgs.map((img, index) => (
+        {content.images.map((img, index) => (
           <SwiperSlide className={styles.slide} key={index}>
-            <Image src={img} alt="hero img" fill loading="eager" />
+            <Image src={getMedia(img.image as Media).url} alt="hero img" fill loading="eager" />
           </SwiperSlide>
         ))}
       </Swiper>
 
       <div className={`${styles.content} container`}>
-        <h1 className={styles.left_text}>
-          As night falls, TIVI comes alive with music, dancing, and unforgettable celebrations.
-        </h1>
+        <h1 className={styles.left_text}>{content.title}</h1>
 
-        <h1 className={styles.right_text}>
-          Enjoy refined riverside dining at TIVI, where calm ambiance meets exceptional cuisine and
-          stunning Mtkvari views.
-        </h1>
+        <h1 className={styles.right_text}>{content.subtitle}</h1>
       </div>
 
       <div className={`${styles.tablet} container`}>
         <h1>
-          Enjoy refined riverside dining at TIVI, where calm ambiance meets exceptional cuisine and
-          stunning Mtkvari views. As night falls, TIVI comes alive with music, dancing, and
-          unforgettable celebrations.
+          {content.title} {content.subtitle}
         </h1>
 
         <div className={styles.navigation}>

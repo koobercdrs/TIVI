@@ -1,6 +1,5 @@
 import { revalidatePath } from 'next/cache'
 import { GlobalConfig } from 'payload'
-import { event_packages } from '../config'
 
 export const HomeView: GlobalConfig = {
   slug: 'home-view',
@@ -22,6 +21,7 @@ export const HomeView: GlobalConfig = {
       name: 'hero',
       fields: [
         {
+          required: true,
           name: 'images',
           type: 'array',
           label: 'მთავარი სექციის სლაიდერი',
@@ -156,6 +156,7 @@ export const HomeView: GlobalConfig = {
       name: 'about',
       fields: [
         {
+          required: true,
           name: 'images',
           type: 'array',
           label: 'ჩვენს შესახებ სექციის სლაიდერი',
@@ -190,9 +191,39 @@ export const HomeView: GlobalConfig = {
     {
       name: 'menu',
       label: 'მენუ',
+      type: 'group',
       required: true,
-      relationTo: 'menu',
-      type: 'relationship',
+      fields: [
+        {
+          label: 'პრიველი მენუს დასახელება',
+          localized: true,
+          required: true,
+          name: 'name',
+          type: 'text',
+        },
+        {
+          label: 'მეორე მენუს დასახელება',
+          localized: true,
+          required: true,
+          name: 'subname',
+          type: 'text',
+        },
+        {
+          label: 'მენუს ჩამონათვალი',
+          name: 'menu_list',
+          required: true,
+          type: 'array',
+          fields: [
+            {
+              name: 'menu',
+              label: 'მენუ',
+              required: true,
+              relationTo: 'menu',
+              type: 'relationship',
+            },
+          ],
+        },
+      ],
     },
 
     // boat sections
@@ -405,6 +436,7 @@ export const HomeView: GlobalConfig = {
       fields: [
         // Header Info
         {
+          required: true,
           label: 'სათაური და აღწერა',
           name: 'header',
           type: 'group',
@@ -434,6 +466,7 @@ export const HomeView: GlobalConfig = {
 
         // Contact Information
         {
+          required: true,
           label: 'საკონტაქტო ინფორმაცია',
           name: 'info',
           type: 'group',
@@ -473,6 +506,7 @@ export const HomeView: GlobalConfig = {
         // Social Media
         {
           label: 'სოციალური ქსელები',
+          required: true,
           name: 'social',
           type: 'group',
           fields: [
@@ -500,8 +534,9 @@ export const HomeView: GlobalConfig = {
         // Google Maps
         {
           label: 'Google Maps',
-          name: 'map',
+          required: true,
           type: 'group',
+          name: 'map',
           fields: [
             {
               label: 'Google Maps Embed URL',

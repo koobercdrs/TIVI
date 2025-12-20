@@ -1,71 +1,28 @@
+import { HomeView, Menu as IMenu } from '@/payload-types'
 import { MenuCard } from './card'
 import styles from './menu.module.scss'
 
-const data = [
-  {
-    id: 1,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 2,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 3,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 4,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 5,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 6,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-  {
-    id: 7,
-    name: 'Dish Full Name',
-    desc: 'Here goes Dish Description text & Ingredients...',
-    banner: '/images/menu-banner.png',
-    price: 24,
-  },
-]
+export const Menu = ({ content }: { content: HomeView['menu'] }) => {
+  const drinks = content.menu_list
+    .filter((e) => (e.menu as IMenu).type === 'drink')
+    .map((e) => e.menu as IMenu)
 
-export const Menu = () => {
+  const dishes = content.menu_list
+    .filter((e) => (e.menu as IMenu).type === 'dish')
+    .map((e) => e.menu as IMenu)
+
   return (
     <section id="RESTAURANT" className={styles.section}>
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>Menu</h1>
+        <h1 className={styles.title}>{content.name}</h1>
 
-        <MenuCard side="right" data={data} />
+        <MenuCard side="right" data={dishes} />
       </div>
 
       <div className={styles.wrapper}>
-        <h1 className={styles.title}>Drinks</h1>
+        <h1 className={styles.title}>{content.subname}</h1>
 
-        <MenuCard side="left" data={data} />
+        <MenuCard side="left" data={drinks} />
       </div>
     </section>
   )

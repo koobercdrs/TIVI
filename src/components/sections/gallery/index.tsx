@@ -3,22 +3,21 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from './gallery.module.scss'
+import { HomeView } from '@/payload-types'
 
-const filter = ['Restaurant Images', 'Water Transport', 'Events', 'Menu']
-
-export const Gallery = () => {
+export const Gallery = ({ content }: { content: HomeView['gallery'] }) => {
   const [selectedFilter, setFilter] = useState('Restaurant Images')
 
   return (
     <section id="GALLERY" className={`${styles.section} container`}>
       <div className={styles.filter}>
-        {filter.map((item, index) => (
+        {content.categories.map((item, index) => (
           <div
-            className={`${styles.filter_item} ${selectedFilter === item ? styles.active : ''}`}
-            onClick={() => setFilter(item)}
+            className={`${styles.filter_item} ${selectedFilter === item.name ? styles.active : ''}`}
+            onClick={() => setFilter(item.name)}
             key={index}
           >
-            {item}
+            {item.name}
           </div>
         ))}
       </div>

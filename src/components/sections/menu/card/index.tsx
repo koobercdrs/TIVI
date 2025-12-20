@@ -1,24 +1,18 @@
 'use client'
+import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from './card.module.scss'
-import { useState } from 'react'
-
-interface IMenu {
-  id: number
-  name: string
-  desc: string
-  price: number
-  banner: string
-}
+import { Media, Menu } from '@/payload-types'
+import { getMedia } from '@/library/payload'
 
 interface IProps {
-  data: IMenu[]
   side?: string
+  data: Menu[]
 }
 
 export const MenuCard = ({ data, side = 'left' }: IProps) => {
-  const [selectedMenu, setSelectedMenu] = useState<IMenu>(data[0])
+  const [selectedMenu, setSelectedMenu] = useState<Menu>(data[0])
 
   return (
     <section className={`${styles.wrapper} ${styles[side]} container`}>
@@ -44,8 +38,8 @@ export const MenuCard = ({ data, side = 'left' }: IProps) => {
       </div>
 
       <Image
+        src={getMedia(selectedMenu.image as Media).url}
         className={styles.banner}
-        src={selectedMenu.banner}
         draggable={false}
         height={560}
         alt="banner"

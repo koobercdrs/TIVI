@@ -7,7 +7,6 @@ import Link from 'next/link'
 
 import styles from './navbar.module.scss'
 import { LayoutView } from '@/payload-types'
-import { getMedia } from '@/library/helpers'
 
 const socials = [
   {
@@ -107,10 +106,10 @@ export const Navbar = ({ content }: { content: LayoutView['navbar'] }) => {
       </header>
 
       <MobileMenu
+        onClose={() => setOpen(false)}
         content={content.navigation}
         hash={hash}
         open={open}
-        onClose={() => setOpen(false)}
       />
     </Fragment>
   )

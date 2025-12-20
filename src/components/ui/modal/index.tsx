@@ -1,28 +1,24 @@
 import { Fragment } from 'react'
 
 import styles from './modal.module.scss'
-import { events, IEvent } from '@/data'
 import { EventModal } from '@/components/models/event-modal'
 import { SpecialModal } from '@/components/models/special-modal'
 import { StandardModal } from '@/components/models/standard-modal'
+import { IEvent } from '@/components/sections/events/card'
 
 type IModelType = 'event' | 'standard' | 'special'
 interface IProps {
-  eventId: number
+  event: IEvent
   type: IModelType
   onClose: () => void
 }
 
-export const Modal = ({ onClose, eventId, type }: IProps) => {
-  const event = events.find((e) => e.id === eventId)
-
-  if (!event) return null
-
+export const Modal = ({ onClose, event, type }: IProps) => {
   return (
     <Fragment>
       <section className={styles.modal}>
         <div className={styles.wrapper}>
-          <ModalCard type={type} event={event} />
+          <ModalCard onClose={onClose} type={type} event={event} />
         </div>
       </section>
 
@@ -31,15 +27,15 @@ export const Modal = ({ onClose, eventId, type }: IProps) => {
   )
 }
 
-const ModalCard = ({ type, event }: { type: IModelType; event: IEvent }) => {
+const ModalCard = ({ type, event, onClose }: IProps) => {
   switch (type) {
     case 'event':
-      return <EventModal event={event} />
+      return <EventModal onClose={onClose} event={event} />
     case 'special':
       return <SpecialModal />
     case 'standard':
       return <StandardModal />
     default:
-      return <EventModal event={event} />
+      return <EventModal onClose={onClose} event={event} />
   }
 }

@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
 import styles from './events.module.scss'
-import { events } from '@/data'
 import { Card } from './card'
 
 import { HomeView } from '@/payload-types'
@@ -22,7 +21,7 @@ export const Events = ({ content }: { content: HomeView['events'] }) => {
         <h1 className={styles.title}>{content.section_title}</h1>
 
         <div className={styles.wrapper}>
-          {events.map((event) => (
+          {content.events_list.map((event) => (
             <Card key={event.id} event={event} />
           ))}
         </div>

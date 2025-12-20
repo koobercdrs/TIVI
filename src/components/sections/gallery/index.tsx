@@ -9,8 +9,8 @@ import { HomeView } from '@/payload-types'
 type IGallery = HomeView['gallery']['categories'][0]['images']
 
 export const Gallery = ({ content }: { content: HomeView['gallery'] }) => {
-  const [gallery, setGallery] = useState<IGallery>([])
-  const [selectedId, setSelectedId] = useState<string>('')
+  const [gallery, setGallery] = useState<IGallery>(content.categories[0].images)
+  const [selectedId, setSelectedId] = useState<string>(content.categories[0].id || '')
 
   return (
     <section id="GALLERY" className={`${styles.section} container`}>

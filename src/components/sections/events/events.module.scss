@@ -33,14 +33,16 @@
 
     .wrapper {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(220px, 0.35fr));
       gap: 96px;
 
       @media screen and (max-width: 1200px) {
         gap: 32px;
       }
 
-     
+      @media screen and (max-width: 480px) {
+        grid-template-columns: 1fr;
+      }
     }
   }
 }

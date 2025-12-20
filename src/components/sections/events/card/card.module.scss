@@ -32,6 +32,12 @@
     @include regular-b;
     margin: 8px 0 24px;
 
+    line-clamp: 3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+
     @media screen and (max-width: 960px) {
       font-size: 12px;
       line-height: 16px;

@@ -19,9 +19,10 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      required: true,
       localized: true,
-      label: 'სურათის აღწერა SEO-სთვის.',
+      required: false,
+      label: 'Alt ტექსტი',
+      admin: { description: 'სურათის აღწერა accessibility-სთვის' },
     },
   ],
 }

@@ -6,9 +6,13 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import path from 'path'
 
-import { Users } from './payload/collections/Users'
-import { Media } from './payload/collections/Media'
+import { LayoutView } from './payload/globals/layout-globals'
 import { HomeView } from './payload/globals/home-globals'
+
+import { Events } from './payload/collections/event'
+import { Media } from './payload/collections/Media'
+import { Users } from './payload/collections/Users'
+import { Menu } from './payload/collections/menu'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -16,8 +20,8 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   sharp,
   defaultDepth: 2,
-  globals: [HomeView],
-  collections: [Users, Media],
+  globals: [HomeView, LayoutView],
+  collections: [Users, Media, Events, Menu],
   secret: process.env.PAYLOAD_SECRET || '',
   db: mongooseAdapter({ url: process.env.DATABASE_URI || '' }),
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

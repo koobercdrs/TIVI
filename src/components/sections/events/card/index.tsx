@@ -22,7 +22,7 @@ export const Card = ({ event }: { event: IEvent }) => {
         <Button onClick={() => setOpen(true)}>See Details</Button>
       </div>
 
-      {open && <Modal eventId={event.id} onClose={() => setOpen(false)} />}
+      {open && <Modal type="event" eventId={event.id} onClose={() => setOpen(false)} />}
     </Fragment>
   )
 }

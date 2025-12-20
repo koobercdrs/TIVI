@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
+    events: Event;
+    menu: Menu;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -78,6 +80,8 @@ export interface Config {
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    events: EventsSelect<false> | EventsSelect<true>;
+    menu: MenuSelect<false> | MenuSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -89,9 +93,11 @@ export interface Config {
   fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'ka') | ('en' | 'ka')[];
   globals: {
     'home-view': HomeView;
+    'layout-view': LayoutView;
   };
   globalsSelect: {
     'home-view': HomeViewSelect<false> | HomeViewSelect<true>;
+    'layout-view': LayoutViewSelect<false> | LayoutViewSelect<true>;
   };
   locale: 'en' | 'ka';
   user: User & {
@@ -152,7 +158,10 @@ export interface User {
  */
 export interface Media {
   id: string;
-  alt: string;
+  /**
+   * სურათის აღწერა accessibility-სთვის
+   */
+  alt?: string | null;
   _key?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -165,6 +174,73 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: string;
+  name: string;
+  desc: string;
+  price: number;
+  image: string | Media;
+  /**
+   * მენიუ სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე
+   */
+  menu?:
+    | {
+        event: string | Event;
+        food_menu_name: string;
+        drink_menu_name: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * პაკეტების ჩამონათვალი სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე
+   */
+  packages?:
+    | {
+        name: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * ხელის თხოვნის პაკეტების ჩამონათვალი სავალდებულოა მხოლოდ (გულის ფორმის წინადადებების დეკორაცია, სადღესასწაულოდ მორთული სუფრა, წინადადებების ცერემონია ნავზე) ევენთებზე
+   */
+  proposal_packages?: {
+    name: string;
+    list?:
+      | {
+          name: string;
+          id?: string | null;
+        }[]
+      | null;
+    text: string;
+  };
+  package:
+    | 'VIP'
+    | 'premium'
+    | 'standard'
+    | 'Heart_Shaped_Proposal_Decoration'
+    | 'Festively_Decorated_Table'
+    | 'Proposal_Ceremony_on_the_Boat';
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu".
+ */
+export interface Menu {
+  id: string;
+  type: 'dish' | 'drink';
+  name: string;
+  desc: string;
+  price: number;
+  image: string | Media;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -197,6 +273,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: string | Media;
+      } | null)
+    | ({
+        relationTo: 'events';
+        value: string | Event;
+      } | null)
+    | ({
+        relationTo: 'menu';
+        value: string | Menu;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -283,6 +367,58 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events_select".
+ */
+export interface EventsSelect<T extends boolean = true> {
+  name?: T;
+  desc?: T;
+  price?: T;
+  image?: T;
+  menu?:
+    | T
+    | {
+        event?: T;
+        food_menu_name?: T;
+        drink_menu_name?: T;
+        id?: T;
+      };
+  packages?:
+    | T
+    | {
+        name?: T;
+        id?: T;
+      };
+  proposal_packages?:
+    | T
+    | {
+        name?: T;
+        list?:
+          | T
+          | {
+              name?: T;
+              id?: T;
+            };
+        text?: T;
+      };
+  package?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu_select".
+ */
+export interface MenuSelect<T extends boolean = true> {
+  type?: T;
+  name?: T;
+  desc?: T;
+  price?: T;
+  image?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -327,6 +463,266 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface HomeView {
   id: string;
+  hero: {
+    images?:
+      | {
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+    title: string;
+    subtitle: string;
+    primary_btn: string;
+    secondary_btn: string;
+  };
+  events: {
+    /**
+     * მაგ: Make Your Dream Event Come True
+     */
+    section_title: string;
+    /**
+     * ყველა ივენთი
+     */
+    events_list: {
+      /**
+       * ივენთის ბარათის სურათი (384x320px)
+       */
+      image: string | Media;
+      /**
+       * ივენთის სათაური
+       */
+      title: string;
+      /**
+       * ივენთის სრული აღწერა ბარათზე
+       */
+      text: string;
+      btn: string;
+      btns: {
+        label: string;
+        package:
+          | 'VIP'
+          | 'premium'
+          | 'standard'
+          | 'Heart_Shaped_Proposal_Decoration'
+          | 'Festively_Decorated_Table'
+          | 'Proposal_Ceremony_on_the_Boat';
+        id?: string | null;
+      }[];
+      id?: string | null;
+    }[];
+  };
+  about: {
+    images?:
+      | {
+          image: string | Media;
+          id?: string | null;
+        }[]
+      | null;
+    title: string;
+    subtitle: string;
+  };
+  menu: string | Menu;
+  boat_tours: {
+    type: 'left' | 'right';
+    image: string | Media;
+    name: string;
+    details: {
+      people_count: number;
+      gift: string;
+    };
+    desc: string;
+    full_rental: {
+      title: string;
+      list: {
+        item: string;
+        id?: string | null;
+      }[];
+    };
+    group_tour: {
+      /**
+       * მაგ: Group Tour - Dolphin ( Minimum: 5 guests required )
+       */
+      title: string;
+      /**
+       * ჯგუფური ტურისთვის საჭირო მინიმალური ადამიანების რაოდენობა
+       */
+      min_guests?: number | null;
+      tour_details: {
+        icon: 'day' | 'night' | 'money' | 'time';
+        /**
+         * მაგ: Day - 17:00, Night - 21:00, 30₾/Per Guest, 30 Minute
+         */
+        text: string;
+        id?: string | null;
+      }[];
+    };
+    id?: string | null;
+  }[];
+  gallery: {
+    /**
+     * გალერეის ფილტრის კატეგორიები
+     */
+    categories: {
+      /**
+       * მაგ: Restaurant Images, Water Transport, Events, Menu
+       */
+      name: string;
+      images: {
+        image: string | Media;
+        /**
+         * სურათის აღწერა accessibility-სთვის
+         */
+        alt?: string | null;
+        id?: string | null;
+      }[];
+      id?: string | null;
+    }[];
+  };
+  contact: {
+    header: {
+      /**
+       * მაგ: Reach Out to TIVI
+       */
+      title: string;
+      /**
+       * მაგ: Planning a visit or a river cruise? We're just a message away.
+       */
+      description: string;
+    };
+    info: {
+      /**
+       * მაგ: +995 578 761 982
+       */
+      phone: string;
+      /**
+       * მაგ: Everyday from 9:00 - to 23:00
+       */
+      working_hours: string;
+      /**
+       * სრული მისამართი
+       */
+      address: string;
+    };
+    social?: {
+      /**
+       * სრული URL მაგ: https://facebook.com/tivi
+       */
+      facebook?: string | null;
+      /**
+       * სრული URL მაგ: https://instagram.com/tivi
+       */
+      instagram?: string | null;
+      twitter?: string | null;
+      tiktok?: string | null;
+    };
+    map: {
+      /**
+       * Google Maps-დან აიღეთ Embed HTML კოდი და ჩასვით მხოლოდ src-ის URL
+       */
+      embed_url: string;
+      /**
+       * ოფციონალური - ლოკაციის დასახელება
+       */
+      location_name?: string | null;
+    };
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-view".
+ */
+export interface LayoutView {
+  id: string;
+  navbar: {
+    /**
+     * ნავბარის ლოგო (SVG რეკომენდირებულია)
+     */
+    logo: string | Media;
+    /**
+     * მთავარი მენიუს ლინკები
+     */
+    navigation: {
+      /**
+       * მაგ: HOME, RESTAURANT, BOAT TOURS
+       */
+      label: string;
+      /**
+       * მაგ: #, #RESTAURANT, #BOAT-TOURS, /about
+       */
+      href: string;
+      id?: string | null;
+    }[];
+    /**
+     * სოციალური ქსელების ლინკები და იკონები
+     */
+    socials: {
+      platform: 'facebook' | 'instagram' | 'whatsapp' | 'location' | 'twitter' | 'tiktok' | 'linkedin' | 'youtube';
+      /**
+       * SVG icon (24x24px)
+       */
+      icon: string | Media;
+      /**
+       * სრული URL მაგ: https://facebook.com/tivi
+       */
+      link: string;
+      id?: string | null;
+    }[];
+  };
+  footer: {
+    /**
+     * Footer-ის ლოგო სურათი
+     */
+    logo: string | Media;
+    /**
+     * Footer-ის მენიუს ლინკები
+     */
+    navigation: {
+      /**
+       * მაგ: HOME, RESTAURANT, BOAT TOURS
+       */
+      label: string;
+      /**
+       * მაგ: #, #RESTAURANT, #BOAT-TOURS ან https://example.com
+       */
+      href: string;
+      /**
+       * თუ ჩართულია, ლინკი გაიხსნება ახალ ტაბში
+       */
+      open_in_new_tab?: boolean | null;
+      id?: string | null;
+    }[];
+    bottom: {
+      /**
+       * მაგ: All Rights Reserved, © 2024 TIVI
+       */
+      copyright: string;
+      /**
+       * ტექსტი დეველოპერის ლოგოს წინ
+       */
+      developer_text?: string | null;
+      /**
+       * დეველოპერის/სააგენტოს ლოგო
+       */
+      developer_logo?: (string | null) | Media;
+      /**
+       * ლინკი დეველოპერის ვებსაიტზე
+       */
+      developer_url?: string | null;
+    };
+    /**
+     * Footer-ში სოციალური ქსელების ლინკები
+     */
+    social_links?:
+      | {
+          platform: 'facebook' | 'instagram' | 'twitter' | 'tiktok' | 'linkedin' | 'youtube';
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -336,6 +732,199 @@ export interface HomeView {
  * via the `definition` "home-view_select".
  */
 export interface HomeViewSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        title?: T;
+        subtitle?: T;
+        primary_btn?: T;
+        secondary_btn?: T;
+      };
+  events?:
+    | T
+    | {
+        section_title?: T;
+        events_list?:
+          | T
+          | {
+              image?: T;
+              title?: T;
+              text?: T;
+              btn?: T;
+              btns?:
+                | T
+                | {
+                    label?: T;
+                    package?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  about?:
+    | T
+    | {
+        images?:
+          | T
+          | {
+              image?: T;
+              id?: T;
+            };
+        title?: T;
+        subtitle?: T;
+      };
+  menu?: T;
+  boat_tours?:
+    | T
+    | {
+        type?: T;
+        image?: T;
+        name?: T;
+        details?:
+          | T
+          | {
+              people_count?: T;
+              gift?: T;
+            };
+        desc?: T;
+        full_rental?:
+          | T
+          | {
+              title?: T;
+              list?:
+                | T
+                | {
+                    item?: T;
+                    id?: T;
+                  };
+            };
+        group_tour?:
+          | T
+          | {
+              title?: T;
+              min_guests?: T;
+              tour_details?:
+                | T
+                | {
+                    icon?: T;
+                    text?: T;
+                    id?: T;
+                  };
+            };
+        id?: T;
+      };
+  gallery?:
+    | T
+    | {
+        categories?:
+          | T
+          | {
+              name?: T;
+              images?:
+                | T
+                | {
+                    image?: T;
+                    alt?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  contact?:
+    | T
+    | {
+        header?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+            };
+        info?:
+          | T
+          | {
+              phone?: T;
+              working_hours?: T;
+              address?: T;
+            };
+        social?:
+          | T
+          | {
+              facebook?: T;
+              instagram?: T;
+              twitter?: T;
+              tiktok?: T;
+            };
+        map?:
+          | T
+          | {
+              embed_url?: T;
+              location_name?: T;
+            };
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "layout-view_select".
+ */
+export interface LayoutViewSelect<T extends boolean = true> {
+  navbar?:
+    | T
+    | {
+        logo?: T;
+        navigation?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              id?: T;
+            };
+        socials?:
+          | T
+          | {
+              platform?: T;
+              icon?: T;
+              link?: T;
+              id?: T;
+            };
+      };
+  footer?:
+    | T
+    | {
+        logo?: T;
+        navigation?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+              open_in_new_tab?: T;
+              id?: T;
+            };
+        bottom?:
+          | T
+          | {
+              copyright?: T;
+              developer_text?: T;
+              developer_logo?: T;
+              developer_url?: T;
+            };
+        social_links?:
+          | T
+          | {
+              platform?: T;
+              url?: T;
+              id?: T;
+            };
+      };
   _status?: T;
   updatedAt?: T;
   createdAt?: T;

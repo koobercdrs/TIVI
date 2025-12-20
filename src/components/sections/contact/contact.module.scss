@@ -71,6 +71,10 @@
         align-items: center;
         gap: 16px;
 
+        @media screen and (max-width: 375px) {
+          gap: 8px;
+        }
+
         span {
           @include subheader-xs-b;
         }

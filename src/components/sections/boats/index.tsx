@@ -4,7 +4,7 @@ import styles from './boats.module.scss'
 
 export const Boats = () => {
   return (
-    <section className={styles.section}>
+    <section id="BOAT-TOURS" className={styles.section}>
       <h1 className={styles.title}>Experience Boat Tours</h1>
 
       <div className={styles.wrapper}>

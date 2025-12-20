@@ -10,7 +10,7 @@ export const Gallery = () => {
   const [selectedFilter, setFilter] = useState('Restaurant Images')
 
   return (
-    <section className={`${styles.section} container`}>
+    <section id="GALLERY" className={`${styles.section} container`}>
       <div className={styles.filter}>
         {filter.map((item, index) => (
           <div

@@ -55,7 +55,7 @@ const data = [
 
 export const Menu = () => {
   return (
-    <section className={styles.section}>
+    <section id="RESTAURANT" className={styles.section}>
       <div className={styles.wrapper}>
         <h1 className={styles.title}>Menu</h1>
 

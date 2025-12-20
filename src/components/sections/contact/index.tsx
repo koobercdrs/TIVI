@@ -3,7 +3,7 @@ import styles from './contact.module.scss'
 
 export const Contact = () => {
   return (
-    <section className={`${styles.section} container`}>
+    <section id="CONTACT" className={`${styles.section} container`}>
       <div className={styles.content}>
         <div className={styles.info}>
           <h1 className={styles.title}>Reach Out to TIVI</h1>

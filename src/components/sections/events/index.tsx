@@ -5,7 +5,7 @@ import styles from './events.module.scss'
 
 export const Events = () => {
   return (
-    <section className={styles.section}>
+    <section id="EVENTS" className={styles.section}>
       <Image
         className={styles.background}
         src="/images/events-bg.png"

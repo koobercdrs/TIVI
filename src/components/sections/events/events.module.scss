@@ -40,44 +40,7 @@
         gap: 32px;
       }
 
-      .card {
-        display: flex;
-        text-align: center;
-        align-items: center;
-        flex-direction: column;
-
-        img {
-          width: 100%;
-          height: auto;
-          aspect-ratio: 384 / 320;
-          border-radius: 24px;
-        }
-
-        .title {
-          @include subheader-m;
-          margin-top: 16px;
-
-          @media screen and (max-width: 960px) {
-            font-size: 24px;
-            line-height: 36px;
-          }
-
-          @media screen and (max-width: 400px) {
-            font-size: 20px;
-            line-height: 24px;
-          }
-        }
-
-        .text {
-          @include regular-b;
-          margin: 8px 0 24px;
-
-          @media screen and (max-width: 960px) {
-            font-size: 12px;
-            line-height: 16px;
-          }
-        }
-      }
+     
     }
   }
 }

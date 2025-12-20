@@ -1,28 +1,31 @@
+'use client'
 import { Fragment } from 'react'
 
 import styles from './modal.module.scss'
+import { IEvent } from '@/components/sections/events/card'
 import { EventModal } from '@/components/models/event-modal'
 import { SpecialModal } from '@/components/models/special-modal'
 import { StandardModal } from '@/components/models/standard-modal'
-import { IEvent } from '@/components/sections/events/card'
+import { IModelType, useEventModal } from '@/context/events-context'
 
-type IModelType = 'event' | 'standard' | 'special'
 interface IProps {
   event: IEvent
   type: IModelType
   onClose: () => void
 }
 
-export const Modal = ({ onClose, event, type }: IProps) => {
+export const Modal = () => {
+  const { closeModal, type, data } = useEventModal()
+
   return (
     <Fragment>
       <section className={styles.modal}>
         <div className={styles.wrapper}>
-          <ModalCard onClose={onClose} type={type} event={event} />
+          {/* <ModalCard onClose={closeModal} type={type} event={data!} /> */}
         </div>
       </section>
 
-      <div onClick={onClose} className={styles.overlay}></div>
+      <div onClick={closeModal} className={styles.overlay}></div>
     </Fragment>
   )
 }

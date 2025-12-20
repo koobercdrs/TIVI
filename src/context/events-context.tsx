@@ -2,22 +2,27 @@
 import { IEvent } from '@/components/sections/events/card'
 import { createContext, useContext, useState, useCallback, ReactNode } from 'react'
 
-type IModelType = 'event' | 'standard' | 'special'
+export type IModelType = 'event' | 'standard' | 'special'
 
 interface ModalContextType {
   isOpen: boolean
+  type: IModelType
   data: IEvent | null
   closeModal: () => void
-  type: IModelType | null
   open: (type: IModelType, data: IEvent) => void
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined)
 
+interface IProps {
+children: ReactNode ,
+
+}
+
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [type, setModalType] = useState<IModelType | null>(null)
   const [data, setModalData] = useState<IEvent | null>(null)
+  const [type, setModalType] = useState<IModelType>('event')
+  const [isOpen, setIsOpen] = useState(false)
 
   const open = useCallback((type: IModelType, data: IEvent) => {
     setModalType(type)
@@ -28,7 +33,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   }, [])
 
   const closeModal = useCallback(() => {
-    setModalType(null)
+    setModalType('event')
     setModalData(null)
     setIsOpen(false)
 
@@ -44,6 +49,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
 
 export const useEventModal = () => {
   const context = useContext(ModalContext)
+
   if (context === undefined) throw new Error('useModal must be used within a ModalProvider')
 
   return context

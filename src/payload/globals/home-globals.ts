@@ -4,13 +4,13 @@ import { GlobalConfig } from 'payload'
 export const HomeView: GlobalConfig = {
   slug: 'home-view',
   label: 'მთავარი გვერდი',
-  hooks: {
-    afterChange: [
-      async () => {
-        revalidatePath('/', 'layout')
-      },
-    ],
-  },
+  // hooks: {
+  //   afterChange: [
+  //     async () => {
+  //       revalidatePath('/', 'layout')
+  //     },
+  //   ],
+  // },
   versions: { drafts: { autosave: { interval: 1000 } } },
   fields: [
     // hero section
@@ -150,11 +150,25 @@ export const HomeView: GlobalConfig = {
 
     // about section
     {
-      label: 'მთავრი სექცია',
+      label: 'ჩვენ შესახებ სექცია',
       required: true,
       type: 'group',
       name: 'about',
       fields: [
+        {
+          label: 'ზედა ტექსტი',
+          type: 'textarea',
+          localized: true,
+          required: true,
+          name: 'title',
+        },
+        {
+          label: 'ქვედა ტექსტი',
+          localized: true,
+          name: 'subtitle',
+          required: true,
+          type: 'textarea',
+        },
         {
           required: true,
           name: 'images',
@@ -169,20 +183,6 @@ export const HomeView: GlobalConfig = {
               name: 'image',
             },
           ],
-        },
-        {
-          label: 'ზედა ტექსტი',
-          type: 'textarea',
-          localized: true,
-          required: true,
-          name: 'title',
-        },
-        {
-          label: 'ქვედა ტექსტი',
-          localized: true,
-          name: 'subtitle',
-          required: true,
-          type: 'textarea',
         },
       ],
     },
@@ -228,153 +228,167 @@ export const HomeView: GlobalConfig = {
 
     // boat sections
     {
-      name: 'boat_tours',
-      label: 'ტურები',
-      type: 'array',
-      required: true,
+      name: 'boat_tours_section',
+      type: 'group',
       fields: [
         {
-          label: 'სურათის მდებარეობა',
-          required: true,
-          type: 'select',
-          name: 'type',
-          options: [
-            { label: 'მარცხნივ', value: 'left' },
-            { label: 'მარჯვნივ', value: 'right' },
-          ],
-        },
-        {
-          name: 'image',
-          type: 'upload',
-          required: true,
-          label: 'სურათი',
-          relationTo: 'media',
-        },
-        {
-          label: 'დასახელება',
+          label: 'სექციის დასახელება',
           localized: true,
           required: true,
           name: 'name',
           type: 'text',
         },
 
-        // Details
         {
-          label: 'დეტალები',
+          name: 'boat_tours',
+          label: 'ტურები',
+          type: 'array',
           required: true,
-          name: 'details',
-          type: 'group',
           fields: [
             {
-              label: 'ადამიანების რაოდენობა',
-              name: 'people_count',
+              label: 'სურათის მდებარეობა',
               required: true,
-              type: 'number',
+              type: 'select',
+              name: 'side',
+              options: [
+                { label: 'მარცხნივ', value: 'left' },
+                { label: 'მარჯვნივ', value: 'right' },
+              ],
+            },
+
+            {
+              type: 'text',
+              required: true,
+              localized: true,
+              name: 'primary_btn',
+              label: 'ღილაკის ტექსტი',
+            },
+
+            {
+              name: 'image',
+              type: 'upload',
+              required: true,
+              label: 'სურათი',
+              relationTo: 'media',
             },
             {
-              label: 'უპირატესობა (შეღავათი)',
+              label: 'დასახელება',
               localized: true,
               required: true,
-              name: 'gift',
+              name: 'name',
               type: 'text',
             },
-          ],
-        },
 
-        // Description
-        {
-          label: 'აღწერა',
-          type: 'textarea',
-          localized: true,
-          required: true,
-          name: 'desc',
-        },
-
-        // Full Boat Rental
-        {
-          label: 'სრული ნავის ქირაობის ინფორმაცია',
-          required: true,
-          name: 'full_rental',
-          type: 'group',
-          fields: [
+            // Details
             {
-              label: 'სექციის დასახელება',
-              localized: true,
+              label: 'დეტალები',
               required: true,
-              name: 'title',
-              type: 'text',
-            },
-            {
-              label: 'ქირაობის სია',
-              required: true,
-              name: 'list',
-              type: 'array',
+              name: 'details',
+              type: 'group',
               fields: [
                 {
-                  label: 'დრო და თანხა (მაგ: 15 minute tour - 150 ₾ (Half Tour))',
+                  label: 'ადამიანების რაოდენობა',
+                  name: 'people_count',
+                  required: true,
+                  type: 'number',
+                },
+                {
+                  label: 'უპირატესობა (შეღავათი)',
                   localized: true,
                   required: true,
-                  name: 'item',
+                  name: 'gift',
                   type: 'text',
                 },
               ],
             },
-          ],
-        },
 
-        // Group Tour
-        {
-          label: 'ჯგუფური ტურის ინფორმაცია',
-          required: true,
-          name: 'group_tour',
-          type: 'group',
-          fields: [
+            // Description
             {
-              label: 'სექციის დასახელება',
+              label: 'აღწერა',
+              type: 'textarea',
               localized: true,
               required: true,
-              name: 'title',
-              type: 'text',
-              admin: {
-                description: 'მაგ: Group Tour - Dolphin ( Minimum: 5 guests required )',
-              },
+              name: 'desc',
             },
+
+            // Full Boat Rental
             {
-              label: 'მინიმალური სტუმრების რაოდენობა',
-              name: 'min_guests',
-              required: false,
-              type: 'number',
-              admin: {
-                description: 'ჯგუფური ტურისთვის საჭირო მინიმალური ადამიანების რაოდენობა',
-              },
-            },
-            {
-              label: 'ტურის დეტალები',
+              label: 'სრული ნავის ქირაობის ინფორმაცია',
               required: true,
-              name: 'tour_details',
-              type: 'array',
+              name: 'full_rental',
+              type: 'group',
               fields: [
                 {
-                  label: 'icon',
-                  name: 'icon',
-                  required: true,
-                  type: 'select',
-                  options: [
-                    { label: 'დღე', value: 'day' },
-                    { label: 'ღამე', value: 'night' },
-                    { label: 'ფული', value: 'money' },
-                    { label: 'დრო', value: 'time' },
-                  ],
-                },
-                {
-                  label: 'ტექსტი',
+                  label: 'სექციის დასახელება',
                   localized: true,
                   required: true,
-                  name: 'text',
+                  name: 'title',
+                  type: 'text',
+                },
+                {
+                  label: 'ქირაობის სია',
+                  required: true,
+                  name: 'list',
+                  type: 'array',
+                  fields: [
+                    {
+                      label: 'დრო და თანხა (მაგ: 15 minute tour - 150 ₾ (Half Tour))',
+                      localized: true,
+                      required: true,
+                      name: 'item',
+                      type: 'text',
+                    },
+                  ],
+                },
+              ],
+            },
+
+            // Group Tour
+            {
+              label: 'ჯგუფური ტურის ინფორმაცია',
+              required: true,
+              name: 'group_tour',
+              type: 'group',
+              fields: [
+                {
+                  label: 'სექციის დასახელება',
+                  localized: true,
+                  required: true,
+                  name: 'title',
                   type: 'text',
                   admin: {
-                    description: 'მაგ: Day - 17:00, Night - 21:00, 30₾/Per Guest, 30 Minute',
+                    description: 'მაგ: Group Tour - Dolphin ( Minimum: 5 guests required )',
                   },
+                },
+                {
+                  label: 'ტურის დეტალები',
+                  required: true,
+                  name: 'tour_details',
+                  type: 'array',
+                  fields: [
+                    {
+                      label: 'icon',
+                      name: 'icon',
+                      required: true,
+                      type: 'select',
+                      options: [
+                        { label: 'დღე', value: 'day' },
+                        { label: 'ღამე', value: 'night' },
+                        { label: 'ფული', value: 'money' },
+                        { label: 'დრო', value: 'time' },
+                      ],
+                    },
+                    {
+                      label: 'ტექსტი',
+                      localized: true,
+                      required: true,
+                      name: 'text',
+                      type: 'text',
+                      admin: {
+                        description: 'მაგ: Day - 17:00, Night - 21:00, 30₾/Per Guest, 30 Minute',
+                      },
+                    },
+                  ],
                 },
               ],
             },

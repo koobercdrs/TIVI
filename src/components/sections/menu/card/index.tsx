@@ -2,9 +2,9 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+import { Menu } from '@/payload-types'
 import styles from './card.module.scss'
-import { Media, Menu } from '@/payload-types'
-import { getMedia } from '@/library/payload'
+import { getMedia } from '@/library/helpers'
 
 interface IProps {
   side?: string
@@ -38,7 +38,7 @@ export const MenuCard = ({ data, side = 'left' }: IProps) => {
       </div>
 
       <Image
-        src={getMedia(selectedMenu.image as Media).url}
+        src={selectedMenu ? getMedia(selectedMenu.image).url : '/images/menu-banner.png'}
         className={styles.banner}
         draggable={false}
         height={560}

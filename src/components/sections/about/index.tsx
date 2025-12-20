@@ -5,9 +5,9 @@ import { useState } from 'react'
 import Image from 'next/image'
 
 import styles from './about.module.scss'
+import { HomeView } from '@/payload-types'
+import { getMedia } from '@/library/helpers'
 import { Button } from '@/components/ui/button'
-import { HomeView, Media } from '@/payload-types'
-import { getMedia } from '@/library/payload'
 
 export const About = ({ content }: { content: HomeView['about'] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
@@ -22,7 +22,7 @@ export const About = ({ content }: { content: HomeView['about'] }) => {
       >
         {content.images.map((img, index) => (
           <SwiperSlide className={styles.slide} key={index}>
-            <Image src={getMedia(img.image as Media).url} alt="hero img" fill loading="eager" />
+            <Image src={getMedia(img.image).url} alt="hero img" fill loading="eager" />
           </SwiperSlide>
         ))}
       </Swiper>

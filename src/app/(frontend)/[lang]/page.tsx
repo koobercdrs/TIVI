@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation'
-import { Fragment } from 'react'
+import { cache, Fragment } from 'react'
 
 import { Contact } from '@/components/sections/contact'
 import { Gallery } from '@/components/sections/gallery'
@@ -12,7 +12,7 @@ import { Hero } from '@/components/sections/hero'
 import { getPayload } from '@/library/payload'
 import { ILang } from '@/types'
 
-const getData = async (lang: ILang) => {
+const getData = cache(async (lang: ILang) => {
   try {
     const payload = await getPayload()
 
@@ -22,7 +22,7 @@ const getData = async (lang: ILang) => {
   } catch (_) {
     return null
   }
-}
+})
 
 export default async function Home({ params }: { params: Promise<{ lang: ILang }> }) {
   const { lang } = await params
@@ -34,10 +34,10 @@ export default async function Home({ params }: { params: Promise<{ lang: ILang }
   return (
     <Fragment>
       <Hero content={content.hero} />
-      <Events content={content.events} /> //
+      <Events content={content.events} />
       <About content={content.about} />
       <Menu content={content.menu} />
-      <Boats content={content.boat_tours} />
+      <Boats content={content.boat_tours_section} />
       <Gallery content={content.gallery} />
       <Contact content={content.contact} />
     </Fragment>

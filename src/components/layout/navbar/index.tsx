@@ -6,33 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import styles from './navbar.module.scss'
-
-const links = [
-  {
-    href: '#',
-    label: 'HOME',
-  },
-  {
-    href: '#RESTAURANT',
-    label: 'RESTAURANT',
-  },
-  {
-    href: '#BOAT-TOURS',
-    label: 'BOAT TOURS',
-  },
-  {
-    href: '#EVENTS',
-    label: 'EVENTS',
-  },
-  {
-    href: '#GALLERY',
-    label: 'GALLERY',
-  },
-  {
-    href: '#CONTACT',
-    label: 'CONTACT',
-  },
-]
+import { LayoutView } from '@/payload-types'
+import { getMedia } from '@/library/helpers'
 
 const socials = [
   {
@@ -53,7 +28,7 @@ const socials = [
   },
 ]
 
-export const Navbar = () => {
+export const Navbar = ({ content }: { content: LayoutView['navbar'] }) => {
   const [open, setOpen] = useState(false)
   const [hash, setHash] = useState('#')
 
@@ -77,8 +52,8 @@ export const Navbar = () => {
         <div className={`${styles.navbar} container`}>
           <a href="#">
             <Image
-              className={styles.logo}
               src="/icons/Logo.svg"
+              className={styles.logo}
               draggable={false}
               height={40}
               width={96}
@@ -89,7 +64,7 @@ export const Navbar = () => {
 
           <nav className={styles.nav}>
             <ul className={styles.ul}>
-              {links.map((link, index) => {
+              {content.navigation.map((link, index) => {
                 const isActive = hash === link.href
 
                 return (
@@ -113,9 +88,9 @@ export const Navbar = () => {
               {socials.map((social, index) => (
                 <a key={`${index}_${social.link}`} href="#" className={styles.socialLink}>
                   <Image
-                    draggable={false}
-                    alt="Social Media"
                     src={social.icon}
+                    alt="Social Media"
+                    draggable={false}
                     loading="eager"
                     height={24}
                     width={24}
@@ -131,7 +106,12 @@ export const Navbar = () => {
         </div>
       </header>
 
-      <MobileMenu hash={hash} open={open} onClose={() => setOpen(false)} />
+      <MobileMenu
+        content={content.navigation}
+        hash={hash}
+        open={open}
+        onClose={() => setOpen(false)}
+      />
     </Fragment>
   )
 }
@@ -177,15 +157,16 @@ interface IMobileMenu {
   hash: string
   open: boolean
   onClose: () => void
+  content: LayoutView['navbar']['navigation']
 }
 
-const MobileMenu = ({ hash, open, onClose }: IMobileMenu) => {
+const MobileMenu = ({ hash, open, onClose, content }: IMobileMenu) => {
   return (
     <Fragment>
       {open && <div onClick={() => onClose()} className={styles.overlay} />}
 
       <div className={`${styles.mobile_navbar} ${open ? styles.open : ''}`}>
-        {links.map((link, index) => {
+        {content.map((link, index) => {
           const isActive = hash === link.href
 
           return (

@@ -1,42 +1,16 @@
 import Image from 'next/image'
 
 import styles from './footer.module.scss'
+import { LayoutView } from '@/payload-types'
 
-const links = [
-  {
-    href: '#',
-    label: 'HOME',
-  },
-  {
-    href: '#RESTAURANT',
-    label: 'RESTAURANT',
-  },
-  {
-    href: '#BOAT-TOURS',
-    label: 'BOAT TOURS',
-  },
-  {
-    href: '#EVENTS',
-    label: 'EVENTS',
-  },
-  {
-    href: '#GALLERY',
-    label: 'GALLERY',
-  },
-  {
-    href: '#CONTACT',
-    label: 'CONTACT',
-  },
-]
-
-export const Footer = () => {
+export const Footer = ({ content }: { content: LayoutView['footer'] }) => {
   return (
     <footer className={`${styles.footer} container`}>
       <div className={styles.top}>
-        <Image draggable={false} src="/icons/footer-icon.svg" alt="logo" width={756} height={400} />
+        <Image src="/icons/footer-icon.svg" draggable={false} height={400} width={756} alt="logo" />
 
         <div className={styles.menu}>
-          {links.map((link, index) => (
+          {content.navigation.map((link, index) => (
             <a key={index} href={link.href}>
               {link.label}
             </a>
@@ -45,10 +19,10 @@ export const Footer = () => {
       </div>
 
       <div className={styles.bottom}>
-        <h1 className={styles.left}>All Rights Reserved.</h1>
+        <h1 className={styles.left}>{content.bottom.copyright}</h1>
 
         <div className={styles.right}>
-          <h1>Designed & Developed by</h1>
+          <h1>{content.bottom.developer_text}</h1>
 
           <Image
             src="/icons/koober-logo.svg"

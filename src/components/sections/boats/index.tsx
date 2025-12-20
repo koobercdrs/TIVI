@@ -1,23 +1,20 @@
 import { BoatCard } from './card'
 
-import styles from './boats.module.scss'
 import { HomeView } from '@/payload-types'
-import { Fragment } from 'react'
+import styles from './boats.module.scss'
 
-export const Boats = ({ content }: { content: HomeView['boat_tours'] }) => {
+export const Boats = ({ content }: { content: HomeView['boat_tours_section'] }) => {
   return (
-    <Fragment>
-      {content.map((item) => (
-        <section id="BOAT-TOURS" className={styles.section}>
-          <h1 className={styles.title}>{item.name}</h1>
+    <div id="BOAT-TOURS">
+      <section className={styles.section}>
+        <h1 className={styles.title}>{content.name}</h1>
 
-          <div className={styles.wrapper}>
-            <BoatCard content={item} side="right" />
-
-            <BoatCard content={item} side="left" />
-          </div>
-        </section>
-      ))}
-    </Fragment>
+        <div className={styles.wrapper}>
+          {content.boat_tours.map((item, index) => (
+            <BoatCard key={index} content={item} side={item.side} />
+          ))}
+        </div>
+      </section>
+    </div>
   )
 }

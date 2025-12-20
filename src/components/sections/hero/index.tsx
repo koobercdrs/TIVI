@@ -7,9 +7,10 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import styles from './hero.module.scss'
 
+import { getMedia } from '@/library/helpers'
+import { HomeView } from '@/payload-types'
+
 import 'swiper/css'
-import { HomeView, Media } from '@/payload-types'
-import { getMedia } from '@/library/payload'
 
 export const Hero = ({ content }: { content: HomeView['hero'] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
@@ -26,7 +27,7 @@ export const Hero = ({ content }: { content: HomeView['hero'] }) => {
       >
         {content.images.map((img, index) => (
           <SwiperSlide className={styles.slide} key={index}>
-            <Image src={getMedia(img.image as Media).url} alt="hero img" fill priority />
+            <Image src={getMedia(img.image).url} alt="hero img" fill priority />
           </SwiperSlide>
         ))}
       </Swiper>

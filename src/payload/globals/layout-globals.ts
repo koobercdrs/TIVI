@@ -3,7 +3,7 @@ import { GlobalConfig } from 'payload'
 
 export const LayoutView: GlobalConfig = {
   slug: 'layout-view',
-  label: 'მთავარი გვერდი',
+  label: 'საიტის ლეიაუთი (ნავიგაცია & footer)',
   hooks: {
     afterChange: [
       async () => {
@@ -197,62 +197,6 @@ export const LayoutView: GlobalConfig = {
               defaultValue: 'Designed & Developed by',
               admin: {
                 description: 'ტექსტი დეველოპერის ლოგოს წინ',
-              },
-            },
-            {
-              label: 'დეველოპერის ლოგო',
-              name: 'developer_logo',
-              type: 'upload',
-              required: false,
-              relationTo: 'media',
-              admin: {
-                description: 'დეველოპერის/სააგენტოს ლოგო',
-              },
-            },
-            {
-              label: 'დეველოპერის ლინკი',
-              name: 'developer_url',
-              type: 'text',
-              required: false,
-              admin: {
-                description: 'ლინკი დეველოპერის ვებსაიტზე',
-                placeholder: 'https://koobercoders.com',
-              },
-            },
-          ],
-        },
-
-        // Social Media Links (optional)
-        {
-          label: 'სოციალური ქსელები (ოფციონალური)',
-          name: 'social_links',
-          type: 'array',
-          required: false,
-          admin: {
-            description: 'Footer-ში სოციალური ქსელების ლინკები',
-          },
-          fields: [
-            {
-              label: 'პლატფორმა',
-              name: 'platform',
-              type: 'select',
-              required: true,
-              options: [
-                { label: 'Facebook', value: 'facebook' },
-                { label: 'Instagram', value: 'instagram' },
-                { label: 'Twitter/X', value: 'twitter' },
-                { label: 'TikTok', value: 'tiktok' },
-                { label: 'LinkedIn', value: 'linkedin' },
-                { label: 'YouTube', value: 'youtube' },
-              ],
-            },
-            {
-              label: 'ლინკი',
-              name: 'url',
-              type: 'text',
-              required: true,
-              admin: {
-                placeholder: 'https://facebook.com/tivi',
               },
             },
           ],

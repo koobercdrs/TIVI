@@ -3,6 +3,7 @@ import Image from 'next/image'
 import styles from './events.module.scss'
 import { events } from '@/data'
 import { Card } from './card'
+
 import { HomeView } from '@/payload-types'
 
 export const Events = ({ content }: { content: HomeView['events'] }) => {

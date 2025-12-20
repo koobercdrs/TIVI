@@ -1,6 +1,6 @@
 import { HomeView, Menu as IMenu } from '@/payload-types'
-import { MenuCard } from './card'
 import styles from './menu.module.scss'
+import { MenuCard } from './card'
 
 export const Menu = ({ content }: { content: HomeView['menu'] }) => {
   const drinks = content.menu_list

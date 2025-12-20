@@ -508,12 +508,12 @@ export interface HomeView {
     }[];
   };
   about: {
+    title: string;
+    subtitle: string;
     images: {
       image: string | Media;
       id?: string | null;
     }[];
-    title: string;
-    subtitle: string;
   };
   menu: {
     name: string;
@@ -523,42 +523,42 @@ export interface HomeView {
       id?: string | null;
     }[];
   };
-  boat_tours: {
-    type: 'left' | 'right';
-    image: string | Media;
+  boat_tours_section: {
     name: string;
-    details: {
-      people_count: number;
-      gift: string;
-    };
-    desc: string;
-    full_rental: {
-      title: string;
-      list: {
-        item: string;
-        id?: string | null;
-      }[];
-    };
-    group_tour: {
-      /**
-       * მაგ: Group Tour - Dolphin ( Minimum: 5 guests required )
-       */
-      title: string;
-      /**
-       * ჯგუფური ტურისთვის საჭირო მინიმალური ადამიანების რაოდენობა
-       */
-      min_guests?: number | null;
-      tour_details: {
-        icon: 'day' | 'night' | 'money' | 'time';
+    boat_tours: {
+      side: 'left' | 'right';
+      primary_btn: string;
+      image: string | Media;
+      name: string;
+      details: {
+        people_count: number;
+        gift: string;
+      };
+      desc: string;
+      full_rental: {
+        title: string;
+        list: {
+          item: string;
+          id?: string | null;
+        }[];
+      };
+      group_tour: {
         /**
-         * მაგ: Day - 17:00, Night - 21:00, 30₾/Per Guest, 30 Minute
+         * მაგ: Group Tour - Dolphin ( Minimum: 5 guests required )
          */
-        text: string;
-        id?: string | null;
-      }[];
-    };
-    id?: string | null;
-  }[];
+        title: string;
+        tour_details: {
+          icon: 'day' | 'night' | 'money' | 'time';
+          /**
+           * მაგ: Day - 17:00, Night - 21:00, 30₾/Per Guest, 30 Minute
+           */
+          text: string;
+          id?: string | null;
+        }[];
+      };
+      id?: string | null;
+    }[];
+  };
   gallery: {
     /**
      * გალერეის ფილტრის კატეგორიები
@@ -698,25 +698,7 @@ export interface LayoutView {
        * ტექსტი დეველოპერის ლოგოს წინ
        */
       developer_text?: string | null;
-      /**
-       * დეველოპერის/სააგენტოს ლოგო
-       */
-      developer_logo?: (string | null) | Media;
-      /**
-       * ლინკი დეველოპერის ვებსაიტზე
-       */
-      developer_url?: string | null;
     };
-    /**
-     * Footer-ში სოციალური ქსელების ლინკები
-     */
-    social_links?:
-      | {
-          platform: 'facebook' | 'instagram' | 'twitter' | 'tiktok' | 'linkedin' | 'youtube';
-          url: string;
-          id?: string | null;
-        }[]
-      | null;
   };
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -765,14 +747,14 @@ export interface HomeViewSelect<T extends boolean = true> {
   about?:
     | T
     | {
+        title?: T;
+        subtitle?: T;
         images?:
           | T
           | {
               image?: T;
               id?: T;
             };
-        title?: T;
-        subtitle?: T;
       };
   menu?:
     | T
@@ -786,44 +768,49 @@ export interface HomeViewSelect<T extends boolean = true> {
               id?: T;
             };
       };
-  boat_tours?:
+  boat_tours_section?:
     | T
     | {
-        type?: T;
-        image?: T;
         name?: T;
-        details?:
+        boat_tours?:
           | T
           | {
-              people_count?: T;
-              gift?: T;
-            };
-        desc?: T;
-        full_rental?:
-          | T
-          | {
-              title?: T;
-              list?:
+              side?: T;
+              primary_btn?: T;
+              image?: T;
+              name?: T;
+              details?:
                 | T
                 | {
-                    item?: T;
-                    id?: T;
+                    people_count?: T;
+                    gift?: T;
                   };
-            };
-        group_tour?:
-          | T
-          | {
-              title?: T;
-              min_guests?: T;
-              tour_details?:
+              desc?: T;
+              full_rental?:
                 | T
                 | {
-                    icon?: T;
-                    text?: T;
-                    id?: T;
+                    title?: T;
+                    list?:
+                      | T
+                      | {
+                          item?: T;
+                          id?: T;
+                        };
                   };
+              group_tour?:
+                | T
+                | {
+                    title?: T;
+                    tour_details?:
+                      | T
+                      | {
+                          icon?: T;
+                          text?: T;
+                          id?: T;
+                        };
+                  };
+              id?: T;
             };
-        id?: T;
       };
   gallery?:
     | T
@@ -917,15 +904,6 @@ export interface LayoutViewSelect<T extends boolean = true> {
           | {
               copyright?: T;
               developer_text?: T;
-              developer_logo?: T;
-              developer_url?: T;
-            };
-        social_links?:
-          | T
-          | {
-              platform?: T;
-              url?: T;
-              id?: T;
             };
       };
   _status?: T;

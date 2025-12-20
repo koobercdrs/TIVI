@@ -2,13 +2,13 @@ import Image from 'next/image'
 
 import { Button } from '@/components/ui/button'
 
-import { HomeView, Media } from '@/payload-types'
-import { getMedia } from '@/library/payload'
 import styles from './card.module.scss'
+import { HomeView } from '@/payload-types'
+import { getMedia } from '@/library/helpers'
 
 interface IProps {
   side: 'left' | 'right'
-  content: HomeView['boat_tours'][number]
+  content: HomeView['boat_tours_section']['boat_tours'][number]
 }
 
 export const BoatCard = ({ side, content }: IProps) => {
@@ -16,7 +16,7 @@ export const BoatCard = ({ side, content }: IProps) => {
     <section className={styles.section}>
       <div className={`${styles.wrapper} ${styles[side]} container`}>
         <Image
-          src={getMedia(content.image as Media).url}
+          src={getMedia(content.image).url}
           className={styles.banner}
           height={480}
           width={822}
@@ -46,8 +46,10 @@ export const BoatCard = ({ side, content }: IProps) => {
             <h1 className={styles.title}>{content.full_rental.title}</h1>
 
             <div className={styles.rental_content}>
-              {content.full_rental.list.map((obj) => (
-                <p className={styles.text}>{obj.item}</p>
+              {content.full_rental.list.map((obj, index) => (
+                <p key={index} className={styles.text}>
+                  {obj.item}
+                </p>
               ))}
             </div>
           </div>
@@ -56,26 +58,30 @@ export const BoatCard = ({ side, content }: IProps) => {
             <h1 className={styles.title}>{content.group_tour.title}</h1>
 
             <div className={styles.about_content}>
-              <div className={styles.card}>
-                <Image src="/icons/day.svg" alt="icon" width={24} height={24} />
-                <span>Day - 17:00</span>
-              </div>
-              <div className={styles.card}>
-                <Image src="/icons/night.svg" alt="icon" width={24} height={24} />
-                <span>Night - 21:00</span>
-              </div>
-              <div className={styles.card}>
-                <Image src="/icons/money.svg" alt="icon" width={24} height={24} />
-                <span>30₾/Per Guest</span>
-              </div>
-              <div className={styles.card}>
-                <Image src="/icons/time.svg" alt="icon" width={24} height={24} />
-                <span>30 Minute</span>
-              </div>
+              {content.group_tour.tour_details.map((item, index) => {
+                var icon = '/icons/day.svg'
+
+                if (item.icon === 'day') {
+                  icon = '/icons/day.svg'
+                } else if (item.icon === 'night') {
+                  icon = '/icons/night.svg'
+                } else if (item.icon === 'money') {
+                  icon = '/icons/money.svg'
+                } else if (item.icon === 'time') {
+                  icon = '/icons/time.svg'
+                }
+
+                return (
+                  <div key={index} className={styles.card}>
+                    <Image src={icon} alt="icon" width={24} height={24} />
+                    <span>{item.text}</span>
+                  </div>
+                )
+              })}
             </div>
           </div>
 
-          <Button>Make a Reservation</Button>
+          <Button>{content.primary_btn}</Button>
         </div>
       </div>
     </section>

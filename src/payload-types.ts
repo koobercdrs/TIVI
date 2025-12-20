@@ -188,14 +188,14 @@ export interface Event {
   /**
    * მენიუ სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე
    */
-  menu?:
-    | {
-        event: string | Event;
-        food_menu_name: string;
-        drink_menu_name: string;
-        id?: string | null;
-      }[]
-    | null;
+  menu?: {
+    food_menu_name: string;
+    drink_menu_name: string;
+    list: {
+      menu: string | Menu;
+      id?: string | null;
+    }[];
+  };
   /**
    * პაკეტების ჩამონათვალი სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე
    */
@@ -377,10 +377,14 @@ export interface EventsSelect<T extends boolean = true> {
   menu?:
     | T
     | {
-        event?: T;
         food_menu_name?: T;
         drink_menu_name?: T;
-        id?: T;
+        list?:
+          | T
+          | {
+              menu?: T;
+              id?: T;
+            };
       };
   packages?:
     | T
@@ -497,15 +501,9 @@ export interface HomeView {
        */
       text: string;
       btn: string;
-      btns: {
+      packages: {
         label: string;
-        package:
-          | 'VIP'
-          | 'premium'
-          | 'standard'
-          | 'Heart_Shaped_Proposal_Decoration'
-          | 'Festively_Decorated_Table'
-          | 'Proposal_Ceremony_on_the_Boat';
+        event: string | Event;
         id?: string | null;
       }[];
       id?: string | null;
@@ -569,10 +567,6 @@ export interface HomeView {
       name: string;
       images: {
         image: string | Media;
-        /**
-         * სურათის აღწერა accessibility-სთვის
-         */
-        alt?: string | null;
         id?: string | null;
       }[];
       id?: string | null;
@@ -612,8 +606,6 @@ export interface HomeView {
        * სრული URL მაგ: https://instagram.com/tivi
        */
       instagram?: string | null;
-      twitter?: string | null;
-      tiktok?: string | null;
     };
     map: {
       /**
@@ -757,11 +749,11 @@ export interface HomeViewSelect<T extends boolean = true> {
               title?: T;
               text?: T;
               btn?: T;
-              btns?:
+              packages?:
                 | T
                 | {
                     label?: T;
-                    package?: T;
+                    event?: T;
                     id?: T;
                   };
               id?: T;
@@ -830,7 +822,6 @@ export interface HomeViewSelect<T extends boolean = true> {
                 | T
                 | {
                     image?: T;
-                    alt?: T;
                     id?: T;
                   };
               id?: T;
@@ -857,8 +848,6 @@ export interface HomeViewSelect<T extends boolean = true> {
           | {
               facebook?: T;
               instagram?: T;
-              twitter?: T;
-              tiktok?: T;
             };
         map?:
           | T

@@ -3,6 +3,7 @@ import type { CollectionConfig } from 'payload'
 export const Menu: CollectionConfig = {
   slug: 'menu',
   labels: { plural: 'მენუ' },
+  admin: { useAsTitle: 'name' },
   fields: [
     {
       label: 'მენიუს ტიპი (სასმელი | საჭმელი)',

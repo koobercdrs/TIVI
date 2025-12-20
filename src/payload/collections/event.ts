@@ -3,6 +3,7 @@ import { event_packages } from '../config'
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  admin: { useAsTitle: 'name' },
   labels: { plural: 'ევენთები', singular: 'ევენთი' },
   fields: [
     {
@@ -38,18 +39,13 @@ export const Events: CollectionConfig = {
 
     {
       name: 'menu',
-      type: 'array',
+      type: 'group',
+      label: 'მენუ',
       admin: {
         condition: (data) => ['VIP', 'premium', 'standard'].includes(data.package),
         description: 'მენიუ სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე',
       },
       fields: [
-        {
-          name: 'event',
-          required: true,
-          type: 'relationship',
-          relationTo: 'events',
-        },
         {
           type: 'text',
           required: true,
@@ -64,12 +60,28 @@ export const Events: CollectionConfig = {
           name: 'drink_menu_name',
           label: 'სასმელის კოლექციის დასახელება',
         },
+        {
+          name: 'list',
+          type: 'array',
+          required: true,
+          label: 'მენიუს ჩამონათვალი',
+          fields: [
+            {
+              name: 'menu',
+              label: 'მენუ',
+              required: true,
+              relationTo: 'menu',
+              type: 'relationship',
+            },
+          ],
+        },
       ],
     },
 
     {
       type: 'array',
       name: 'packages',
+      label: 'ევენთის პაკეტები',
       admin: {
         condition: (data) => ['VIP', 'premium', 'standard'].includes(data.package),
         description:
@@ -89,6 +101,7 @@ export const Events: CollectionConfig = {
     {
       type: 'group',
       name: 'proposal_packages',
+      label: 'ხელის თხოვნის პაკეტები',
       admin: {
         condition: (data) => !['VIP', 'premium', 'standard'].includes(data.package),
         description:

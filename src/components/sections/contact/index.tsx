@@ -14,26 +14,50 @@ export const Contact = () => {
 
         <div className={styles.wrapper}>
           <div className={styles.card}>
-            <Image src="/contact/Phone.svg" alt="icon" width={32} height={32} />
+            <Image draggable={false} src="/contact/Phone.svg" alt="icon" width={32} height={32} />
             <span>+995 578 761 982</span>
           </div>
           <div className={styles.card}>
-            <Image src="/contact/Everyday.svg" alt="icon" width={32} height={32} />
+            <Image
+              draggable={false}
+              src="/contact/Everyday.svg"
+              alt="icon"
+              width={32}
+              height={32}
+            />
             <span>Everyday from 9:00 - to 23:00</span>
           </div>
           <div className={styles.card}>
-            <Image src="/contact/Location.svg" alt="icon" width={32} height={32} />
+            <Image
+              draggable={false}
+              src="/contact/Location.svg"
+              alt="icon"
+              width={32}
+              height={32}
+            />
             <span>Their exact address goes here</span>
           </div>
 
           <div className={styles.social}>
             <div className={styles.card}>
-              <Image src="/contact/Facebook.svg" alt="icon" width={32} height={32} />
+              <Image
+                draggable={false}
+                src="/contact/Facebook.svg"
+                alt="icon"
+                width={32}
+                height={32}
+              />
               <span>Facebook</span>
             </div>
 
             <div className={styles.card}>
-              <Image src="/contact/Instagram.svg" alt="icon" width={32} height={32} />
+              <Image
+                src="/contact/Instagram.svg"
+                draggable={false}
+                height={32}
+                width={32}
+                alt="icon"
+              />
               <span>Instagram</span>
             </div>
           </div>

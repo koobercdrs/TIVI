@@ -33,7 +33,7 @@ export const Footer = () => {
   return (
     <footer className={`${styles.footer} container`}>
       <div className={styles.top}>
-        <Image src="/icons/footer-icon.svg" alt="logo" width={756} height={400} />
+        <Image draggable={false} src="/icons/footer-icon.svg" alt="logo" width={756} height={400} />
 
         <div className={styles.menu}>
           {links.map((link, index) => (
@@ -50,7 +50,14 @@ export const Footer = () => {
         <div className={styles.right}>
           <h1>Designed & Developed by</h1>
 
-          <Image src="/icons/koober-logo.svg" alt="koober coders" width={64} height={24} priority />
+          <Image
+            src="/icons/koober-logo.svg"
+            alt="koober coders"
+            draggable={false}
+            height={24}
+            width={64}
+            priority
+          />
         </div>
       </div>
     </footer>

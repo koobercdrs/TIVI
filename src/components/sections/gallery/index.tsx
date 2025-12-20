@@ -26,7 +26,13 @@ export const Gallery = () => {
       <div className={styles.gallery}>
         {Array.from({ length: 9 }).map((item, index) => (
           <div key={index} className={styles.banner}>
-            <Image src="/images/hero-img-2.jpg" alt="gallery" height={712} width={440} />
+            <Image
+              src="/images/hero-img-2.jpg"
+              draggable={false}
+              alt="gallery"
+              height={712}
+              width={440}
+            />
           </div>
         ))}
       </div>

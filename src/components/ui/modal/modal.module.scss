@@ -13,22 +13,18 @@
 
   .wrapper {
     width: 90%;
-    height: 90%;
     padding: 32px;
+    min-height: 600px;
     border-radius: 48px;
     pointer-events: auto;
     background: var(--blue-300);
 
     @media screen and (max-width: 1024px) {
       width: 100%;
+      padding: 0px;
       height: 100%;
       overflow-y: auto;
       border-radius: 0;
-      padding-bottom: 0px;
-    }
-
-    @media screen and (max-width: 420px) {
-      padding: 16px;
     }
   }
 }

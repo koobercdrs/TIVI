@@ -1,68 +1,84 @@
-import { IEvent } from '@/components/sections/events/card'
-import { Button } from '@/components/ui/button'
-import { getMedia } from '@/library/helpers'
+import type { Swiper as SwiperType } from 'swiper'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { useState } from 'react'
+import { X } from 'lucide-react'
 import Image from 'next/image'
 
+import { Button } from '@/components/ui/button'
 import styles from './event-model.module.scss'
-import { X } from 'lucide-react'
+import { getMedia } from '@/library/helpers'
+import { Event, HomeView } from '@/payload-types'
 
 interface IProps {
-  event: IEvent
+  onSelect: (id: string) => void
+  events: HomeView['events']
   onClose: () => void
 }
 
-export const EventModal = ({ event, onClose }: IProps) => {
-  const image = getMedia(event.image)
+export const EventModal = ({ events, onClose, onSelect }: IProps) => {
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.mobile_header}>
-        <h1 className={styles.title}>{event.title}</h1>
+    <Swiper
+      slidesPerView={1}
+      className={styles.swiper}
+      onSwiper={(swiper) => setSwiperInstance(swiper)}
+    >
+      {events.events_list.map((event, index) => {
+        const image = getMedia(event.image)
 
-        <Button onClick={() => onClose()} variant="icon">
-          <X className={styles.menu_icon} />
-        </Button>
-      </div>
+        return (
+          <SwiperSlide className={styles.slide} key={index}>
+            <div className={styles.mobile_header}>
+              <h1 className={styles.title}>{event.title}</h1>
 
-      <Image
-        className={styles.banner}
-        src={image.url}
-        alt={image.url}
-        loading="eager"
-        height={500}
-        width={480}
-      />
+              <Button onClick={() => onClose()} variant="icon">
+                <X className={styles.menu_icon} />
+              </Button>
+            </div>
 
-      <div className={styles.content}>
-        <div className={styles.content_info}>
-          <div className={styles.top}>
-            <h1 className={styles.title}>{event.title}</h1>
-            <p className={styles.text}>{event.text}</p>
-          </div>
+            <Image
+              className={styles.banner}
+              src={image.url}
+              alt={image.url}
+              loading="eager"
+              height={500}
+              width={480}
+            />
 
-          <div className={styles.packages}>
-            {event.packages.map((item, index) => {
-              return (
-                <Button key={index}>
-                  <span>{item.label}</span>
+            <div className={styles.content}>
+              <div className={styles.content_info}>
+                <div className={styles.top}>
+                  <h1 className={styles.title}>{event.title}</h1>
+                  <p className={styles.text}>{event.text}</p>
+                </div>
 
-                  <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
+                <div className={styles.packages}>
+                  {event.packages.map((item, index) => {
+                    return (
+                      <Button onClick={() => onSelect((item.event as Event).id || '')} key={index}>
+                        <span>{item.label}</span>
+
+                        <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
+                      </Button>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className={styles.navigation}>
+                <Button onClick={() => swiperInstance?.slidePrev()} variant="icon">
+                  <Image src="/icons/left-arrow.svg" alt="left arrow" width={12} height={24} />
                 </Button>
-              )
-            })}
-          </div>
-        </div>
 
-        <div className={styles.navigation}>
-          <Button variant="icon">
-            <Image src="/icons/left-arrow.svg" alt="left arrow" width={12} height={24} />
-          </Button>
-
-          <Button variant="icon">
-            <Image src="/icons/right-arrow.svg" alt="right arrow" width={12} height={24} />
-          </Button>
-        </div>
-      </div>
-    </div>
+                <Button onClick={() => swiperInstance?.slideNext()} variant="icon">
+                  <Image src="/icons/right-arrow.svg" alt="right arrow" width={12} height={24} />
+                </Button>
+              </div>
+            </div>
+          </SwiperSlide>
+        )
+      })}
+    </Swiper>
   )
 }

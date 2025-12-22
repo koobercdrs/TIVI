@@ -24,7 +24,11 @@ const getData = cache(async (lang: ILang) => {
   }
 })
 
-export default async function Home({ params }: { params: Promise<{ lang: ILang }> }) {
+interface IProps {
+  params: Promise<{ lang: ILang }>
+}
+
+export default async function Home({ params }: IProps) {
   const { lang } = await params
 
   const content = await getData(lang)

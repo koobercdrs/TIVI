@@ -1,44 +1,36 @@
 'use client'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
-import styles from './modal.module.scss'
-import { IEvent } from '@/components/sections/events/card'
+import { PackageModal } from '@/components/models/package-modal'
 import { EventModal } from '@/components/models/event-modal'
-import { SpecialModal } from '@/components/models/special-modal'
-import { StandardModal } from '@/components/models/standard-modal'
-import { IModelType, useEventModal } from '@/context/events-context'
+import { HomeView } from '@/payload-types'
+import styles from './modal.module.scss'
 
 interface IProps {
-  event: IEvent
-  type: IModelType
+  events: HomeView['events']
   onClose: () => void
 }
 
-export const Modal = () => {
-  const { closeModal, type, data } = useEventModal()
-
+export const Modal = ({ events, onClose }: IProps) => {
   return (
     <Fragment>
       <section className={styles.modal}>
         <div className={styles.wrapper}>
-          {/* <ModalCard onClose={closeModal} type={type} event={data!} /> */}
+          <ModalCard onClose={onClose} events={events} />
         </div>
       </section>
 
-      <div onClick={closeModal} className={styles.overlay}></div>
+      <div onClick={onClose} className={styles.overlay}></div>
     </Fragment>
   )
 }
 
-const ModalCard = ({ type, event, onClose }: IProps) => {
-  switch (type) {
-    case 'event':
-      return <EventModal onClose={onClose} event={event} />
-    case 'special':
-      return <SpecialModal />
-    case 'standard':
-      return <StandardModal />
-    default:
-      return <EventModal onClose={onClose} event={event} />
-  }
+const ModalCard = ({ events, onClose }: IProps) => {
+  const [selectedEventId, setSelectedEventId] = useState('')
+
+  const selectEvent = (id: string) => setSelectedEventId(id)
+
+  if (selectedEventId) return <PackageModal id={selectedEventId} />
+
+  return <EventModal onSelect={selectEvent} onClose={onClose} events={events} />
 }

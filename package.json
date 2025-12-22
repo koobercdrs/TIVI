@@ -24,6 +24,7 @@
     "@payloadcms/richtext-lexical": "3.68.5",
     "@payloadcms/storage-uploadthing": "^3.68.5",
     "@payloadcms/ui": "3.68.5",
+    "@tanstack/react-query": "^5.90.12",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",

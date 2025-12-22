@@ -8,7 +8,7 @@ import Link from 'next/link'
 
 export type IEvent = HomeView['events']['events_list'][0]
 
-export const Card = ({ event }: { event: IEvent }) => {
+export const Card = ({ event, onClick }: { event: IEvent; onClick: () => void }) => {
   return (
     <div className={styles.card}>
       <Image draggable={false} src="/images/event-img.png" alt="event" width={384} height={320} />
@@ -17,9 +17,7 @@ export const Card = ({ event }: { event: IEvent }) => {
 
       <p className={styles.text}>{event.text}</p>
 
-      <Link href="/en/event">
-        <Button>See Details</Button>
-      </Link>
+      <Button onClick={onClick}>See Details</Button>
     </div>
   )
 }

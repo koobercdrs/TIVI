@@ -1,16 +1,16 @@
-import { revalidatePath } from 'next/cache'
+// import { revalidatePath } from 'next/cache'
 import { GlobalConfig } from 'payload'
 
 export const LayoutView: GlobalConfig = {
   slug: 'layout-view',
   label: 'საიტის ლეიაუთი (ნავიგაცია & footer)',
-  hooks: {
-    afterChange: [
-      async () => {
-        revalidatePath('/', 'layout')
-      },
-    ],
-  },
+  // hooks: {
+  //   afterChange: [
+  //     async () => {
+  //       revalidatePath('/', 'layout')
+  //     },
+  //   ],
+  // },
   versions: { drafts: { autosave: { interval: 1000 } } },
   fields: [
     {

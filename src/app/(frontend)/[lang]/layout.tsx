@@ -4,7 +4,7 @@ import localFont from 'next/font/local'
 
 import './../styles.scss'
 
-import { ModalProvider } from '@/context/events-context'
+import { QueryProvider } from '@/providers/QueryProvider'
 import { Navbar } from '@/components/layout/navbar'
 import { Footer } from '@/components/layout/footer'
 import { getPayload } from '@/library/payload'
@@ -50,7 +50,7 @@ export default async function RootLayout({ children, params }: IProps) {
         <main>
           <Navbar content={content.navbar} />
 
-          <ModalProvider>{children}</ModalProvider>
+          <QueryProvider>{children}</QueryProvider>
 
           <Footer content={content.footer} />
         </main>

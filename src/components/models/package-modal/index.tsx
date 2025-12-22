@@ -8,25 +8,26 @@ import { getMedia } from '@/library/helpers'
 import { Menu } from '@/payload-types'
 import { ILang } from '@/types'
 
+import { PackageModalError, PackageModalLoading } from '../statuses/statuses'
 import styles from './package-modal.module.scss'
 
-export const PackageModal = ({ id }: { id: string }) => {
+export const PackageModal = ({ id, back }: { id: string; back: () => void }) => {
   const params: { lang: ILang } = useParams()
 
-  const { data, status } = useQuery({
+  const { data, status, refetch } = useQuery({
     queryKey: ['event-details', id],
     queryFn: async () => await getEventById(id, params['lang'] || 'en'),
   })
 
-  if (status === 'pending') return 'loading...'
+  if (status === 'pending') return <PackageModalLoading />
 
-  if (status === 'error') return 'error'
+  if (status === 'error') return <PackageModalError onRetry={() => refetch()} />
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <div className={styles.left}>
-          <Button variant="icon">
+          <Button onClick={back} variant="icon">
             <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
           </Button>
 
@@ -53,7 +54,7 @@ export const PackageModal = ({ id }: { id: string }) => {
               ))}
             </div>
           </div>
-          
+
           <div className={styles.menu_card}>
             <div className={styles.menu_name}>{data.menu?.drink_menu_name}</div>
 

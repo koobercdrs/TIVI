@@ -1,0 +1,191 @@
+@use '../../../styles/mixins.scss' as *;
+
+// Loading Skeletons
+.skeleton_button {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_title {
+  width: 200px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_text {
+  width: 150px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_price {
+  width: 80px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_menu_name {
+  width: 120px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_menu_item {
+  width: 100%;
+  height: 18px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_banner {
+  width: 100%;
+  height: 312px;
+  border-radius: 24px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_package_name {
+  width: 180px;
+  height: 20px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.skeleton_button_full {
+  width: 100%;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    var(--white-100) 25%,
+    var(--white-200) 50%,
+    var(--white-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// Error State
+.error_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 64px 32px;
+  min-height: 400px;
+
+  .error_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    background-color: var(--error-bg, rgba(239, 68, 68, 0.1));
+  }
+
+  .error_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+
+    .error_title {
+      @include subheader-m;
+      color: var(--error-color, #ef4444);
+    }
+
+    .error_message {
+      @include regular-b;
+      color: var(--white-300);
+      max-width: 400px;
+    }
+  }
+}

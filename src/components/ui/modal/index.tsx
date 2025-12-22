@@ -30,7 +30,9 @@ const ModalCard = ({ events, onClose }: IProps) => {
 
   const selectEvent = (id: string) => setSelectedEventId(id)
 
-  if (selectedEventId) return <PackageModal id={selectedEventId} />
+  if (selectedEventId) {
+    return <PackageModal back={() => setSelectedEventId('')} id={selectedEventId} />
+  }
 
   return <EventModal onSelect={selectEvent} onClose={onClose} events={events} />
 }

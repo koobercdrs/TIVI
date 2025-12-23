@@ -37,6 +37,10 @@ interface IProps {
   children: ReactNode
 }
 
+export async function generateStaticParams() {
+  return [{ lang: 'en' }, { lang: 'ka' }]
+}
+
 export default async function RootLayout({ children, params }: IProps) {
   const { lang } = await params
 

@@ -36,8 +36,8 @@ export const Gallery = ({ content }: { content: HomeView['gallery'] }) => {
               src={getMedia(item.image).url}
               alt={getMedia(item.image).alt}
               draggable={false}
-              height={712}
-              width={440}
+              height={1020}
+              width={980}
             />
           </div>
         ))}

@@ -118,7 +118,9 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
             </div>
           </div>
 
-          <Button>{params.lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
+          <a href="#CONTACT">
+            <Button>{params.lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
+          </a>
         </div>
       </div>
     </div>

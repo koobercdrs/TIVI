@@ -81,7 +81,9 @@ export const BoatCard = ({ side, content }: IProps) => {
             </div>
           </div>
 
-          <Button>{content.primary_btn}</Button>
+          <a href="#CONTACT">
+            <Button>{content.primary_btn}</Button>
+          </a>
         </div>
       </div>
     </section>

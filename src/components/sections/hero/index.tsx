@@ -60,8 +60,13 @@ export const Hero = ({ content }: { content: HomeView['hero'] }) => {
             <h1 className={styles.subtitle}>{content.subtitle}</h1>
 
             <div className={styles.btns}>
-              <Button>{content.primary_btn}</Button>
-              <Button variant="secondary">{content.secondary_btn}</Button>
+              <a href="#about">
+                <Button>{content.primary_btn}</Button>
+              </a>
+
+              <a href="#BOAT_TOURS">
+                <Button variant="secondary">{content.secondary_btn}</Button>
+              </a>
             </div>
           </div>
         </div>

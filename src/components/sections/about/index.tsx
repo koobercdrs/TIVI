@@ -13,7 +13,7 @@ export const About = ({ content }: { content: HomeView['about'] }) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
   return (
-    <section className={styles.section}>
+    <section id='about' className={styles.section}>
       <Swiper
         loop
         slidesPerView={1}

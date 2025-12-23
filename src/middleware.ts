@@ -7,6 +7,8 @@ const defaultLocale = 'en'
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
+  if (pathname.includes('admin')) return NextResponse.next()
+
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   )

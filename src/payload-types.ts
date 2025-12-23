@@ -183,7 +183,7 @@ export interface Event {
   id: string;
   name: string;
   desc: string;
-  price: number;
+  price: string;
   image: string | Media;
   /**
    * მენიუ სავალდებულოა მხოლოდ VIP, პრემიუმი ან სტანდარტული ევენთებზე

@@ -9,10 +9,12 @@ import { Modal } from '@/components/ui/modal'
 import { HomeView } from '@/payload-types'
 
 export const Events = ({ content }: { content: HomeView['events'] }) => {
+  const [initialSlide, setInitialSlide] = useState(0)
   const [open, setOpen] = useState(false)
 
-  const onOpen = () => {
+  const onOpen = (index: number) => {
     setOpen(true)
+    setInitialSlide(index)
     document.body.style.overflowY = 'hidden'
   }
 
@@ -37,14 +39,21 @@ export const Events = ({ content }: { content: HomeView['events'] }) => {
           <h1 className={styles.title}>{content.section_title}</h1>
 
           <div className={styles.wrapper}>
-            {content.events_list.map((event) => (
-              <Card key={event.id} event={event} onClick={onOpen} />
+            {content.events_list.map((event, index) => (
+              <Card key={event.id || index} event={event} onClick={() => onOpen(index)} />
             ))}
           </div>
         </div>
       </section>
 
-      {open && <Modal events={content} onClose={onClose} />}
+      {open && (
+        <Modal
+          events={content}
+          onClose={onClose}
+          initialSlide={initialSlide}
+          onSlide={(e) => setInitialSlide(e)}
+        />
+      )}
     </Fragment>
   )
 }

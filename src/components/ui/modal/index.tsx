@@ -7,16 +7,23 @@ import { HomeView } from '@/payload-types'
 import styles from './modal.module.scss'
 
 interface IProps {
+  onSlide: (index: number) => void
   events: HomeView['events']
+  initialSlide: number
   onClose: () => void
 }
 
-export const Modal = ({ events, onClose }: IProps) => {
+export const Modal = ({ events, initialSlide, onClose, onSlide }: IProps) => {
   return (
     <Fragment>
       <section className={styles.modal}>
         <div className={styles.wrapper}>
-          <ModalCard onClose={onClose} events={events} />
+          <ModalCard
+            initialSlide={initialSlide}
+            onSlide={onSlide}
+            onClose={onClose}
+            events={events}
+          />
         </div>
       </section>
 
@@ -25,7 +32,7 @@ export const Modal = ({ events, onClose }: IProps) => {
   )
 }
 
-const ModalCard = ({ events, onClose }: IProps) => {
+const ModalCard = ({ events, onClose, initialSlide, onSlide }: IProps) => {
   const [selectedEventId, setSelectedEventId] = useState('')
 
   const selectEvent = (id: string) => setSelectedEventId(id)
@@ -34,5 +41,13 @@ const ModalCard = ({ events, onClose }: IProps) => {
     return <PackageModal back={() => setSelectedEventId('')} id={selectedEventId} />
   }
 
-  return <EventModal onSelect={selectEvent} onClose={onClose} events={events} />
+  return (
+    <EventModal
+      initialSlide={initialSlide}
+      onSelect={selectEvent}
+      onSlide={onSlide}
+      onClose={onClose}
+      events={events}
+    />
+  )
 }

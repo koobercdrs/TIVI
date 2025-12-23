@@ -9,13 +9,20 @@
   img {
     width: 100%;
     height: auto;
-    aspect-ratio: 384 / 320;
+    object-fit: cover;
     border-radius: 24px;
+    aspect-ratio: 384 / 320;
   }
 
   .title {
     @include subheader-m;
     margin-top: 16px;
+
+    line-clamp: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 
     @media screen and (max-width: 960px) {
       font-size: 24px;

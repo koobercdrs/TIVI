@@ -26,7 +26,7 @@ export const Events: CollectionConfig = {
       required: true,
       label: 'ფასი',
       name: 'price',
-      type: 'number',
+      type: 'text',
     },
 
     {

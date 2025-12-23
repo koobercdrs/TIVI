@@ -10,18 +10,22 @@ import { getMedia } from '@/library/helpers'
 import { Event, HomeView } from '@/payload-types'
 
 interface IProps {
+  onSlide: (index: number) => void
   onSelect: (id: string) => void
   events: HomeView['events']
+  initialSlide: number
   onClose: () => void
 }
 
-export const EventModal = ({ events, onClose, onSelect }: IProps) => {
+export const EventModal = ({ events, onClose, onSelect, initialSlide, onSlide }: IProps) => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null)
 
   return (
     <Swiper
       slidesPerView={1}
       className={styles.swiper}
+      initialSlide={initialSlide}
+      onSlideChange={(e) => onSlide(e.activeIndex)}
       onSwiper={(swiper) => setSwiperInstance(swiper)}
     >
       {events.events_list.map((event, index) => {
@@ -43,7 +47,7 @@ export const EventModal = ({ events, onClose, onSelect }: IProps) => {
               alt={image.url}
               loading="eager"
               height={500}
-              width={480}
+              width={700}
             />
 
             <div className={styles.content}>

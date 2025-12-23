@@ -5,7 +5,7 @@ import styles from './boats.module.scss'
 
 export const Boats = ({ content }: { content: HomeView['boat_tours_section'] }) => {
   return (
-    <div id="BOAT-TOURS">
+    <div id="BOAT_TOURS">
       <section className={styles.section}>
         <h1 className={styles.title}>{content.name}</h1>
 

@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
+import { Loader } from 'lucide-react'
 import Image from 'next/image'
 
 import { getEventById } from '@/server/queries'
@@ -8,20 +9,37 @@ import { getMedia } from '@/library/helpers'
 import { Menu } from '@/payload-types'
 import { ILang } from '@/types'
 
-import { PackageModalError, PackageModalLoading } from '../statuses/statuses'
 import styles from './package-modal.module.scss'
+import { ProposalModal } from './proposal-moadl'
+
+const NormalPackages = ['VIP', 'premium', 'standard']
 
 export const PackageModal = ({ id, back }: { id: string; back: () => void }) => {
   const params: { lang: ILang } = useParams()
 
-  const { data, status, refetch } = useQuery({
+  const { data, status } = useQuery({
     queryKey: ['event-details', id],
     queryFn: async () => await getEventById(id, params['lang'] || 'en'),
   })
 
-  if (status === 'pending') return <PackageModalLoading />
+  if (status === 'pending') {
+    return (
+      <div className={styles.loader_wrapper}>
+        <Loader className={styles.loader_icon} />
+      </div>
+    )
+  }
 
-  if (status === 'error') return <PackageModalError onRetry={() => refetch()} />
+  if (status === 'error') {
+    return <div></div>
+  }
+
+  const drinks = data.menu?.list.filter((e) => (e.menu as Menu).type === 'drink') || []
+  const dishes = data.menu?.list.filter((e) => (e.menu as Menu).type === 'dish') || []
+
+  if (!NormalPackages.includes(data.package)) {
+    return <ProposalModal lang={params.lang} data={data} back={back} />
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -38,34 +56,38 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
           </div>
         </div>
 
-        <p className={styles.price}>{data.price}₾</p>
+        <p className={styles.price}>{data.price}</p>
       </div>
 
       <div className={styles.content}>
         <div className={styles.menu}>
-          <div className={styles.menu_card}>
-            <div className={styles.menu_name}>{data.menu?.food_menu_name}</div>
+          {dishes.length > 0 && (
+            <div className={styles.menu_card}>
+              <div className={styles.menu_name}>{data.menu?.food_menu_name}</div>
 
-            <div className={styles.menu_list}>
-              {data.menu?.list.map((item, index) => (
-                <p key={index} className={styles.menu_item}>
-                  {(item.menu as Menu).name}
-                </p>
-              ))}
+              <div className={styles.menu_list}>
+                {dishes.map((item, index) => (
+                  <p key={index} className={styles.menu_item}>
+                    {(item.menu as Menu).name}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className={styles.menu_card}>
-            <div className={styles.menu_name}>{data.menu?.drink_menu_name}</div>
+          {drinks?.length > 0 && (
+            <div className={styles.menu_card}>
+              <div className={styles.menu_name}>{data.menu?.drink_menu_name}</div>
 
-            <div className={styles.menu_list}>
-              {data.menu?.list.map((item, index) => (
-                <p key={index} className={styles.menu_item}>
-                  {(item.menu as Menu).name}
-                </p>
-              ))}
+              <div className={styles.menu_list}>
+                {drinks.map((item, index) => (
+                  <p key={index} className={styles.menu_item}>
+                    {(item.menu as Menu).name}
+                  </p>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className={styles.event}>
@@ -96,7 +118,7 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
             </div>
           </div>
 
-          <Button>Make a Reservation</Button>
+          <Button>{params.lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
         </div>
       </div>
     </div>

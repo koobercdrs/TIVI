@@ -16,7 +16,7 @@ export const metadata = {
 }
 
 const tanker = localFont({
-  src: '../../fonts/tanker-regular.otf',
+  src: '../../fonts/Tanker-Regular.otf',
   variable: '--font-primary',
 })
 

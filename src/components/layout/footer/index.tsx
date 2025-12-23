@@ -21,7 +21,7 @@ export const Footer = ({ content }: { content: LayoutView['footer'] }) => {
       <div className={styles.bottom}>
         <h1 className={styles.left}>{content.bottom.copyright}</h1>
 
-        <div className={styles.right}>
+        <a href="https://koobercoders.com" className={styles.right}>
           <h1>{content.bottom.developer_text}</h1>
 
           <Image
@@ -32,7 +32,7 @@ export const Footer = ({ content }: { content: LayoutView['footer'] }) => {
             width={64}
             priority
           />
-        </div>
+        </a>
       </div>
     </footer>
   )

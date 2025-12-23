@@ -190,9 +190,13 @@
             flex-direction: column;
           }
 
-          button {
+          a {
             width: 100%;
             pointer-events: auto;
+
+            button {
+              width: 100%;
+            }
           }
         }
       }

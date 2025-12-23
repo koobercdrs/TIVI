@@ -31,7 +31,7 @@ export const Menu: CollectionConfig = {
     },
     {
       label: 'ფასი',
-      type: 'number',
+      type: 'text',
       localized: true,
       required: true,
       name: 'price',

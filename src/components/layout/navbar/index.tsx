@@ -97,11 +97,11 @@ export const Navbar = ({ content }: { content: LayoutView['navbar'] }) => {
                 </a>
               ))}
             </div>
-          </div>
 
-          <button className={styles.menu} onClick={() => setOpen(!open)}>
-            <TextAlignJustify className={styles.menu_icon} />
-          </button>
+            <button className={styles.menu} onClick={() => setOpen(!open)}>
+              <TextAlignJustify className={styles.menu_icon} />
+            </button>
+          </div>
         </div>
       </header>
 

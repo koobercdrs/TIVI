@@ -83,10 +83,6 @@
       justify-self: end;
       gap: 16px;
 
-      @media screen and (max-width: 1160px) {
-        display: none;
-      }
-
       .language {
         position: relative;
 
@@ -119,6 +115,10 @@
           pointer-events: none;
           visibility: hidden;
           opacity: 0;
+
+          @media screen and (max-width: 1160px) {
+            right: 10px;
+          }
 
           &.open {
             transform: translateY(0);
@@ -153,6 +153,10 @@
         display: flex;
         align-items: center;
         gap: 16px;
+
+        @media screen and (max-width: 1160px) {
+          display: none;
+        }
       }
     }
 

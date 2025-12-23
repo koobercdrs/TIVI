@@ -237,7 +237,7 @@ export interface Menu {
   type: 'dish' | 'drink';
   name: string;
   desc: string;
-  price: number;
+  price: string;
   image: string | Media;
   updatedAt: string;
   createdAt: string;

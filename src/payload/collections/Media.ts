@@ -10,7 +10,7 @@ export const Media: CollectionConfig = {
     },
     resizeOptions: {
       width: 1920,
-      height: 1080,
+      fit: 'inside',
     },
   },
   admin: { description: 'ატვირთეთ სურათები თქვენი საიტისთვის' },

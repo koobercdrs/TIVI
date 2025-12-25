@@ -15,9 +15,6 @@ export const metadata = {
   description: 'A blank template using Payload in a Next.js app.',
 }
 
-export const revalidate = 60 // payloadi ar aapdeitebs : aman unda gafixos (imedimaqvs)
-
-
 const tanker = localFont({
   src: '../../fonts/Tanker-Regular.otf',
   variable: '--font-primary',

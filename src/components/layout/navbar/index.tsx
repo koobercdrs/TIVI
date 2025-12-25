@@ -7,25 +7,13 @@ import Link from 'next/link'
 
 import styles from './navbar.module.scss'
 import { LayoutView } from '@/payload-types'
+import { getMedia } from '@/library/helpers'
 
-const socials = [
-  {
-    icon: 'icons/Facebook.svg',
-    link: '',
-  },
-  {
-    icon: 'icons/Instagram.svg',
-    link: '',
-  },
-  {
-    icon: 'icons/Whatsapp.svg',
-    link: '',
-  },
-  {
-    icon: 'icons/Location.svg',
-    link: '',
-  },
-]
+const getLink = (type: LayoutView['navbar']['socials'][0]['platform'], href: string) => {
+  if (type === 'whatsapp') return `tel:${href}`
+
+  return href
+}
 
 export const Navbar = ({ content }: { content: LayoutView['navbar'] }) => {
   const [open, setOpen] = useState(false)
@@ -84,18 +72,27 @@ export const Navbar = ({ content }: { content: LayoutView['navbar'] }) => {
             <Language />
 
             <div className={styles.socials}>
-              {socials.map((social, index) => (
-                <a key={`${index}_${social.link}`} href="#" className={styles.socialLink}>
-                  <Image
-                    src={social.icon}
-                    alt="Social Media"
-                    draggable={false}
-                    loading="eager"
-                    height={24}
-                    width={24}
-                  />
-                </a>
-              ))}
+              {content.socials.map((social, index) => {
+                const href = getLink(social.platform, social.link)
+
+                return (
+                  <a
+                    key={`${index}_${social.link}`}
+                    className={styles.socialLink}
+                    target="_blank"
+                    href={href}
+                  >
+                    <img
+                      src={getMedia(social.icon).url}
+                      alt="Social Media"
+                      draggable={false}
+                      loading="eager"
+                      height={24}
+                      width={24}
+                    />
+                  </a>
+                )
+              })}
             </div>
 
             <button className={styles.menu} onClick={() => setOpen(!open)}>

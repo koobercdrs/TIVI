@@ -37,14 +37,15 @@ export const MenuCard = ({ data, side = 'left' }: IProps) => {
         })}
       </div>
 
-      <Image
-        src={selectedMenu ? getMedia(selectedMenu.image).url : '/images/menu-banner.png'}
-        className={styles.banner}
-        draggable={false}
-        height={560}
-        alt="banner"
-        width={696}
-      />
+      <MenuImage url={getMedia(selectedMenu.image).url} />
     </section>
+  )
+}
+
+const MenuImage = ({ url }: { url: string }) => {
+  return (
+    <div className={styles.banner}>
+      <Image draggable={false} height={600} alt="banner" width={850} src={url} />
+    </div>
   )
 }

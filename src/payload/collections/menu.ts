@@ -1,9 +1,17 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Menu: CollectionConfig = {
   slug: 'menu',
   labels: { plural: 'მენუ' },
   admin: { useAsTitle: 'name' },
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   fields: [
     {
       label: 'მენიუს ტიპი (სასმელი | საჭმელი)',

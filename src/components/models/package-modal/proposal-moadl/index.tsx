@@ -68,7 +68,9 @@ export const ProposalModal = ({ back, data, lang }: IProps) => {
           </div>
         </div>
 
-        <Button>{lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
+        <a href="#CONTACT">
+          <Button>{lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
+        </a>
       </div>
     </div>
   )

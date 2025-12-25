@@ -15,8 +15,8 @@ export const Card = ({ event, onClick }: { event: IEvent; onClick: () => void })
         src={getMedia(event.image).url}
         alt={getMedia(event.image).alt}
         draggable={false}
-        height={500}
-        width={600}
+        height={600}
+        width={700}
       />
 
       <h1 className={styles.title}>{event.title}</h1>

@@ -1,10 +1,19 @@
 import type { CollectionConfig } from 'payload'
+import { revalidatePath } from 'next/cache'
+
 import { event_packages } from '../config'
 
 export const Events: CollectionConfig = {
   slug: 'events',
   admin: { useAsTitle: 'name' },
   labels: { plural: 'ევენთები', singular: 'ევენთი' },
+  hooks: {
+    afterChange: [
+      async () => {
+        revalidatePath('/', 'layout')
+      },
+    ],
+  },
   fields: [
     {
       label: 'დასახელება',

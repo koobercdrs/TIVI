@@ -16,13 +16,13 @@ export const Menu = ({ content }: { content: HomeView['menu'] }) => {
       <div className={styles.wrapper}>
         <h1 className={styles.title}>{content.name}</h1>
 
-        <MenuCard side="right" data={dishes} />
+        <MenuCard side="right" data={dishes} svg="/svgs/1.svg" />
       </div>
 
       <div className={styles.wrapper}>
         <h1 className={styles.title}>{content.subname}</h1>
 
-        <MenuCard side="left" data={drinks} />
+        <MenuCard side="left" data={drinks} svg="/svgs/2.svg" />
       </div>
     </section>
   )

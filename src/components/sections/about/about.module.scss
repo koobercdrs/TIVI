@@ -127,11 +127,6 @@
     padding-bottom: 24px;
     gap: 116px;
 
-    background-image: url('/images/events-bg.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-
     position: relative;
     margin-top: auto;
     z-index: 2;
@@ -145,6 +140,11 @@
       flex-direction: column;
       text-align: center;
       height: 50%;
+
+      background-image: url('/images/events-bg.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
     }
 
     h1 {

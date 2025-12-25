@@ -10,7 +10,7 @@ export const Boats = ({ content }: { content: HomeView['boat_tours_section'] }) 
 
       <div className={styles.wrapper}>
         {content.boat_tours.map((item, index) => (
-          <BoatCard key={index} content={item} side={item.side} />
+          <BoatCard key={index} content={item} side={item.side} svg={`/svgs/${index + 3}.svg`} />
         ))}
       </div>
     </section>

@@ -11,11 +11,13 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-primary);
   background: var(--blue-100);
+  overflow-x: hidden;
 
   scrollbar-width: thin;
   scrollbar-color: var(--white-100) var(--blue-300);

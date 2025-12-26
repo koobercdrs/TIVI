@@ -1,12 +1,9 @@
-import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { Loader } from 'lucide-react'
 import Image from 'next/image'
 
-import { getEventById } from '@/server/queries'
 import { Button } from '@/components/ui/button'
+import { Event, Menu } from '@/payload-types'
 import { getMedia } from '@/library/helpers'
-import { Menu } from '@/payload-types'
 import { ILang } from '@/types'
 
 import styles from './package-modal.module.scss'
@@ -14,56 +11,39 @@ import { ProposalModal } from './proposal-moadl'
 
 const NormalPackages = ['VIP', 'premium', 'standard']
 
-export const PackageModal = ({ id, back }: { id: string; back: () => void }) => {
+export const PackageModal = ({ event, back }: { event: Event; back: () => void }) => {
   const params: { lang: ILang } = useParams()
 
-  const { data, status } = useQuery({
-    queryKey: ['event-details', id],
-    queryFn: async () => await getEventById(id, params['lang'] || 'en'),
-  })
+  const drinks = event.menu?.list.filter((e) => (e.menu as Menu).type === 'drink') || []
+  const dishes = event.menu?.list.filter((e) => (e.menu as Menu).type === 'dish') || []
 
-  if (status === 'pending') {
-    return (
-      <div className={styles.loader_wrapper}>
-        <Loader className={styles.loader_icon} />
-      </div>
-    )
-  }
-
-  if (status === 'error') {
-    return <div></div>
-  }
-
-  const drinks = data.menu?.list.filter((e) => (e.menu as Menu).type === 'drink') || []
-  const dishes = data.menu?.list.filter((e) => (e.menu as Menu).type === 'dish') || []
-
-  if (!NormalPackages.includes(data.package)) {
-    return <ProposalModal lang={params.lang} data={data} back={back} />
+  if (!NormalPackages.includes(event.package)) {
+    return <ProposalModal lang={params.lang} data={event} back={back} />
   }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <div className={styles.left}>
-          <Button onClick={back} variant="icon">
-            <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
-          </Button>
+        <Button onClick={back} variant="icon">
+          <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
+        </Button>
 
-          <div className={styles.info}>
-            <h1 className={styles.name}>{data.name}</h1>
+        <div className={styles.info}>
+          <h1 className={styles.name}>
+            {event.name}
 
-            <p className={styles.desc}>{data.desc}</p>
-          </div>
+            <p className={styles.price}>{event.price}</p>
+          </h1>
+
+          <p className={styles.desc}>{event.desc}</p>
         </div>
-
-        <p className={styles.price}>{data.price}</p>
       </div>
 
       <div className={styles.content}>
         <div className={styles.menu}>
           {dishes.length > 0 && (
             <div className={styles.menu_card}>
-              <div className={styles.menu_name}>{data.menu?.food_menu_name}</div>
+              <div className={styles.menu_name}>{event.menu?.food_menu_name}</div>
 
               <div className={styles.menu_list}>
                 {dishes.map((item, index) => (
@@ -77,7 +57,7 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
 
           {drinks?.length > 0 && (
             <div className={styles.menu_card}>
-              <div className={styles.menu_name}>{data.menu?.drink_menu_name}</div>
+              <div className={styles.menu_name}>{event.menu?.drink_menu_name}</div>
 
               <div className={styles.menu_list}>
                 {drinks.map((item, index) => (
@@ -94,15 +74,15 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
           <div className={styles.event_content}>
             <Image
               className={styles.event_banner}
-              src={getMedia(data.image).url}
-              alt={getMedia(data.image).alt}
+              src={getMedia(event.image).url}
+              alt={getMedia(event.image).alt}
               loading="eager"
-              height={312}
-              width={313}
+              height={700}
+              width={800}
             />
 
             <div className={styles.event_packages}>
-              {data.packages?.map((item, index) => (
+              {event.packages?.map((item, index) => (
                 <div key={index} className={styles.package_item}>
                   <Image
                     className={styles.package_item_icon}
@@ -118,7 +98,7 @@ export const PackageModal = ({ id, back }: { id: string; back: () => void }) => 
             </div>
           </div>
 
-          <a href="#CONTACT">
+          <a target="_blank" href="https://wa.me/995595073372">
             <Button>{params.lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
           </a>
         </div>

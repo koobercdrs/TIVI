@@ -18,52 +18,53 @@
   .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 24px;
 
-    .left {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      width: 90%;
+    button {
+      flex-shrink: 0;
 
-      button {
-        img {
-          transform: rotate(180deg);
-        }
+      img {
+        transform: rotate(180deg);
       }
+    }
 
-      .info {
+    .info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+
+      .name {
+        @include subheader-m;
+
         display: flex;
-        flex-direction: column;
-        gap: 8px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
 
-        .name {
-          @include subheader-m;
+        @media screen and (max-width: 480px) {
+          font-size: 24px;
+          line-height: 36px;
+        }
+
+        .price {
+          text-wrap: nowrap;
 
           @media screen and (max-width: 480px) {
             font-size: 24px;
             line-height: 36px;
-          }
-        }
-
-        .desc {
-          @include regular-b;
-
-          @media screen and (max-width: 480px) {
-            font-size: 12px;
-            line-height: 16px;
+            text-wrap: nowrap;
           }
         }
       }
-    }
 
-    .price {
-      @include subheader-m;
+      .desc {
+        @include regular-b;
 
-      @media screen and (max-width: 480px) {
-        font-size: 24px;
-        line-height: 36px;
-        text-wrap: nowrap;
+        @media screen and (max-width: 480px) {
+          font-size: 12px;
+          line-height: 16px;
+        }
       }
     }
   }

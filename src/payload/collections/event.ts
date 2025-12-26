@@ -32,6 +32,7 @@ export const Events: CollectionConfig = {
     },
 
     {
+      localized: true,
       required: true,
       label: 'ფასი',
       name: 'price',

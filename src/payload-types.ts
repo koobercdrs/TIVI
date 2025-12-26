@@ -531,7 +531,7 @@ export interface HomeView {
       image: string | Media;
       name: string;
       details: {
-        people_count: number;
+        people_count: string;
         gift: string;
       };
       desc: string;

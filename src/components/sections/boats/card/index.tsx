@@ -32,7 +32,7 @@ export const BoatCard = ({ side, content, svg }: IProps) => {
               <div className={styles.info}>
                 <div className={styles.info_card}>
                   <Image src="/icons/people.svg" alt="icon" width={24} height={24} />
-                  <span>{content.details.people_count} People</span>
+                  <span>{content.details.people_count}</span>
                 </div>
 
                 <div className={styles.info_card}>
@@ -88,7 +88,13 @@ export const BoatCard = ({ side, content, svg }: IProps) => {
             </a>
           </div>
 
-          <Image className={styles.content_wrapper_bg} src={svg} alt="svg" width={600} height={400} />
+          <Image
+            className={styles.content_wrapper_bg}
+            src={svg}
+            alt="svg"
+            width={600}
+            height={400}
+          />
         </div>
       </div>
     </section>

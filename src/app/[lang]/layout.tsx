@@ -89,13 +89,13 @@ export default async function RootLayout({ children, params }: IProps) {
   return (
     <html lang={lang} className={tanker.variable}>
       <body>
+        <Navbar content={content.navbar} />
+
         <main>
-          <Navbar content={content.navbar} />
-
           <QueryProvider>{children}</QueryProvider>
-
-          <Footer content={content.footer} />
         </main>
+
+        <Footer content={content.footer} />
       </body>
     </html>
   )

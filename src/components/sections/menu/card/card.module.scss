@@ -22,6 +22,10 @@
   }
 
   &.left {
+    .banner img {
+      object-fit: cover;
+    }
+
     .content {
       img {
         left: 20%;

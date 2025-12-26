@@ -17,19 +17,19 @@ export const ProposalModal = ({ back, data, lang }: IProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <div className={styles.left}>
-          <Button onClick={back} variant="icon">
-            <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
-          </Button>
+        <Button onClick={back} variant="icon">
+          <Image src="/icons/arrow-right.svg" alt="icon" width={24} height={24} />
+        </Button>
 
-          <div className={styles.info}>
-            <h1 className={styles.name}>{data.name}</h1>
+        <div className={styles.info}>
+          <h1 className={styles.name}>
+            {data.name}
 
-            <p className={styles.desc}>{data.desc}</p>
-          </div>
+            <p className={styles.price}>{data.price}</p>
+          </h1>
+
+          <p className={styles.desc}>{data.desc}</p>
         </div>
-
-        <p className={styles.price}>{data.price}</p>
       </div>
 
       <div className={styles.content}>
@@ -68,7 +68,7 @@ export const ProposalModal = ({ back, data, lang }: IProps) => {
           </div>
         </div>
 
-        <a href="#CONTACT">
+        <a target="_blank" href="https://wa.me/995595073372">
           <Button>{lang === 'ka' ? 'დაჯავშნა' : 'Make a Reservation'}</Button>
         </a>
       </div>

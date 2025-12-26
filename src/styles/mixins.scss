@@ -4,78 +4,78 @@ $mobile: 480px;
 
 // Header
 @mixin header-l {
-  font-size: 80px;
-  font-weight: 400;
-  line-height: 92px;
-  letter-spacing: 0.02em;
+  font-size: var(--header-l-size);
+  font-weight: var(--header-l-weight);
+  line-height: var(--header-l-line);
+  letter-spacing: var(--header-l-spacing);
   color: var(--white-100);
 }
 
 @mixin header-s {
-  font-weight: 400;
-  font-size: 56px;
-  line-height: 64px;
+  font-weight: var(--header-s-weight);
+  font-size: var(--header-s-size);
+  line-height: var(--header-s-line);
   text-align: center;
-  letter-spacing: -0.04em;
+  letter-spacing: var(--header-s-spacing);
   color: var(--white-100);
 }
 
 // Subheader
 @mixin subheader-xs-b {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: var(--subheader-xs-size);
+  font-weight: var(--subheader-xs-weight);
+  line-height: var(--subheader-xs-line);
   color: var(--white-100);
 }
 
 @mixin subheader-xs {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
+  font-size: var(--subheader-xs-size);
+  font-weight: var(--subheader-xs-weight);
+  line-height: var(--subheader-xs-line);
   color: var(--white-200);
 }
 
 @mixin subheader-m {
-  font-size: 36px;
-  font-weight: 400;
-  line-height: 48px;
-  letter-spacing: 0.02em;
+  font-size: var(--subheader-m-size);
+  font-weight: var(--subheader-m-weight);
+  line-height: var(--subheader-m-line);
+  letter-spacing: var(--subheader-m-spacing);
   color: var(--white-100);
 }
 
 @mixin subheader-s {
   font-family: var(--font-secondary);
   color: var(--white-100);
-  letter-spacing: 0.04em;
-  line-height: 28px;
-  font-weight: 500;
-  font-size: 20px;
+  letter-spacing: var(--subheader-s-spacing);
+  line-height: var(--subheader-s-line);
+  font-weight: var(--subheader-s-weight);
+  font-size: var(--subheader-s-size);
 }
 
 // Regular
 @mixin regular-b {
   font-family: var(--font-secondary);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 24px;
-  letter-spacing: 0.02em;
+  font-size: var(--regular-size);
+  font-weight: var(--regular-b-weight);
+  line-height: var(--regular-line);
+  letter-spacing: var(--regular-spacing);
   color: var(--white-200);
 }
 
 @mixin regular {
   font-family: var(--font-secondary);
   color: var(--white-100);
-  letter-spacing: 0.02em;
-  line-height: 24px;
-  font-weight: 400;
-  font-size: 16px;
+  letter-spacing: var(--regular-spacing);
+  line-height: var(--regular-line);
+  font-weight: var(--regular-weight);
+  font-size: var(--regular-size);
 }
 
 // Small
 @mixin small {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
+  font-size: var(--small-size);
+  font-weight: var(--small-weight);
+  line-height: var(--small-line);
   color: var(--white-100);
 }
 
@@ -83,8 +83,8 @@ $mobile: 480px;
 @mixin medium-b {
   font-family: var(--font-secondary);
   color: var(--white-100);
-  letter-spacing: 0.02em;
-  line-height: 16px;
-  font-weight: 600;
-  font-size: 13px;
+  letter-spacing: var(--medium-spacing);
+  line-height: var(--medium-line);
+  font-weight: var(--medium-weight);
+  font-size: var(--medium-size);
 }

@@ -290,7 +290,8 @@ export const HomeView: GlobalConfig = {
                   label: 'ადამიანების რაოდენობა',
                   name: 'people_count',
                   required: true,
-                  type: 'number',
+                  localized: true,
+                  type: 'text',
                 },
                 {
                   label: 'უპირატესობა (შეღავათი)',

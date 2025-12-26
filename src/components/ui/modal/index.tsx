@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 
 import { PackageModal } from '@/components/models/package-modal'
 import { EventModal } from '@/components/models/event-modal'
-import { HomeView } from '@/payload-types'
+import { Event, HomeView } from '@/payload-types'
 import styles from './modal.module.scss'
 
 interface IProps {
@@ -33,18 +33,16 @@ export const Modal = ({ events, initialSlide, onClose, onSlide }: IProps) => {
 }
 
 const ModalCard = ({ events, onClose, initialSlide, onSlide }: IProps) => {
-  const [selectedEventId, setSelectedEventId] = useState('')
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null)
 
-  const selectEvent = (id: string) => setSelectedEventId(id)
-
-  if (selectedEventId) {
-    return <PackageModal back={() => setSelectedEventId('')} id={selectedEventId} />
+  if (selectedEvent) {
+    return <PackageModal back={() => setSelectedEvent(null)} event={selectedEvent} />
   }
 
   return (
     <EventModal
+      onSelect={(e) => setSelectedEvent(e)}
       initialSlide={initialSlide}
-      onSelect={selectEvent}
       onSlide={onSlide}
       onClose={onClose}
       events={events}

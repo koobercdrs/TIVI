@@ -16,13 +16,14 @@ html {
 
 html[lang='ka'] {
   body {
-    font-family: 'Nata Sans', sans-serif;
+    font-family: var(--font-secondary);
   }
 }
 
 body {
   font-family: var(--font-primary);
   background: var(--blue-100);
+  overflow-x: hidden;
 
   scrollbar-width: thin;
   scrollbar-color: var(--white-100) var(--blue-300);

@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 import Image from 'next/image'
 
+import { Event, HomeView } from '@/payload-types'
 import { Button } from '@/components/ui/button'
 import styles from './event-model.module.scss'
 import { getMedia } from '@/library/helpers'
-import { Event, HomeView } from '@/payload-types'
 
 interface IProps {
   onSlide: (index: number) => void
@@ -41,18 +41,17 @@ export const EventModal = ({ events, onClose, onSelect, initialSlide, onSlide }:
               </Button>
             </div>
 
-            <Image
-              className={styles.banner}
-              src={image.url}
-              alt={image.url}
-              loading="eager"
-              height={500}
-              width={700}
-            />
+            <div className={styles.banner}>
+              <Image src={image.url} alt={image.url} loading="eager" height={900} width={1024} />
+            </div>
 
             <div className={styles.content}>
               <div className={styles.content_info}>
                 <div className={styles.top}>
+                  <Button onClick={onClose} variant="icon">
+                    <X className={styles.menu_icon} />
+                  </Button>
+
                   <h1 className={styles.title}>{event.title}</h1>
                   <p className={styles.text}>{event.text}</p>
                 </div>

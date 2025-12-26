@@ -14,12 +14,12 @@ export const Events = ({ content }: { content: HomeView['events'] }) => {
   const onOpen = (index: number) => {
     setOpen(true)
     setInitialSlide(index)
-    document.body.style.overflowY = 'hidden'
+    document.documentElement.style.overflowY = 'hidden'
   }
 
   const onClose = () => {
     setOpen(false)
-    document.body.style.overflowY = ''
+    document.documentElement.style.overflowY = ''
   }
 
   return (

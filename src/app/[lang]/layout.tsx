@@ -87,7 +87,7 @@ export default async function RootLayout({ children, params }: IProps) {
   if (!content) return notFound()
 
   return (
-    <html lang="en" className={tanker.variable}>
+    <html lang={lang} className={tanker.variable}>
       <body>
         <main>
           <Navbar content={content.navbar} />

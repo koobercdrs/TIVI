@@ -32,9 +32,12 @@
             left: 10%;
           }
 
-          @media screen and (max-width: 900px) {
-            right: 10%;
-            left: auto;
+          @media screen and (max-width: 1024px) {
+            width: 100%;
+            height: auto;
+
+            left: 0;
+            top: -70px;
           }
         }
       }
@@ -68,12 +71,12 @@
           height: 500px;
         }
 
-        @media screen and (max-width: 900px) {
+        @media screen and (max-width: 1024px) {
           width: 100%;
           height: auto;
 
           left: 0;
-          top: -80%;
+          top: -70px;
         }
 
         @media screen and (max-width: 480px) {

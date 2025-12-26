@@ -33,67 +33,104 @@
     }
   }
 
-  .content {
-    display: flex;
-    flex-direction: column;
-    padding: 48px 96px;
-    gap: 48px;
+  .content_wrapper {
+    position: relative;
 
-    @media screen and (max-width: 1200px) {
-      padding: 24px;
-      gap: 24px;
+    .content_wrapper_bg {
+      position: absolute;
+      left: -10%;
+      top: 0;
+
+      width: 731px;
+      height: 75vh;
+      opacity: 0.64;
+
+      @media screen and (max-width: 1280px) {
+        top: -40px;
+        left: -10%;
+
+        width: 500px;
+        height: 500px;
+      }
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+        height: auto;
+
+        left: 0;
+        top: -70px;
+      }
+
+      @media screen and (max-width: 480px) {
+        top: 0;
+      }
     }
 
-    @media screen and (max-width: 375px) {
-      padding: 0;
-    }
-
-    .info {
+    .content {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      padding: 48px 96px;
+      gap: 48px;
 
-      .title {
-        @include subheader-m;
+      position: relative;
+      z-index: 1;
+
+      @media screen and (max-width: 1200px) {
+        padding: 24px;
+        gap: 24px;
       }
 
-      .text {
-        @include regular;
-        color: var(--white-300);
-      }
-    }
-
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-
-      @media screen and (max-width: 1000px) {
-        flex-direction: row;
-        flex-wrap: wrap;
+      @media screen and (max-width: 375px) {
+        padding: 0;
       }
 
-      .card {
+      .info {
         display: flex;
-        align-items: center;
+        flex-direction: column;
         gap: 16px;
 
-        @media screen and (max-width: 375px) {
-          gap: 8px;
+        .title {
+          @include subheader-m;
         }
 
-        span {
-          @include subheader-xs-b;
+        .text {
+          @include regular;
+          color: var(--white-300);
         }
       }
 
-      .social {
+      .wrapper {
         display: flex;
-        align-items: center;
-        gap: 48px;
+        flex-direction: column;
+        gap: 32px;
 
-        @media screen and (max-width: 375px) {
-          gap: 24px;
+        @media screen and (max-width: 1000px) {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .card {
+          display: flex;
+          align-items: center;
+          gap: 16px;
+
+          @media screen and (max-width: 375px) {
+            gap: 8px;
+          }
+
+          span {
+            @include subheader-xs-b;
+          }
+        }
+
+        .social {
+          display: flex;
+          align-items: center;
+          gap: 48px;
+
+          @media screen and (max-width: 375px) {
+            gap: 24px;
+          }
         }
       }
     }
@@ -104,6 +141,9 @@
     border-radius: 24px;
     aspect-ratio: 648 / 520;
     background: var(--blue-300);
+
+    position: relative;
+    z-index: 1;
 
     @media screen and (max-width: 1000px) {
       width: 100%;

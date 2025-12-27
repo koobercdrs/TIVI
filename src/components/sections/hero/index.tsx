@@ -33,23 +33,35 @@ export const Hero = ({ content }: { content: HomeView['hero'] }) => {
       </Swiper>
 
       <div className={`${styles.navigation} container`}>
-        <button onClick={() => swiperInstance?.slidePrev()} className={styles.arrow}>
-          <Image src="/icons/left-arrow.svg" alt="left arrow" width={12} height={24} />
-        </button>
+        <div className={styles.navigation_btns}>
+          <a href="#about">
+            <Button>{content.primary_btn}</Button>
+          </a>
 
-        <div className={styles.dots}>
-          {content.images.map((_, index) => (
-            <span
-              key={index}
-              onClick={() => swiperInstance?.slideToLoop(index)}
-              className={activeIndex == index ? styles.active : ''}
-            />
-          ))}
+          <a href="#BOAT_TOURS">
+            <Button variant="secondary">{content.secondary_btn}</Button>
+          </a>
         </div>
 
-        <button onClick={() => swiperInstance?.slideNext()} className={styles.arrow}>
-          <Image src="/icons/right-arrow.svg" alt="right arrow" width={12} height={24} />
-        </button>
+        <div className={styles.navigation_wrapper}>
+          <button onClick={() => swiperInstance?.slidePrev()} className={styles.arrow}>
+            <Image src="/icons/left-arrow.svg" alt="left arrow" width={12} height={24} />
+          </button>
+
+          <div className={styles.dots}>
+            {content.images.map((_, index) => (
+              <span
+                key={index}
+                onClick={() => swiperInstance?.slideToLoop(index)}
+                className={activeIndex == index ? styles.active : ''}
+              />
+            ))}
+          </div>
+
+          <button onClick={() => swiperInstance?.slideNext()} className={styles.arrow}>
+            <Image src="/icons/right-arrow.svg" alt="right arrow" width={12} height={24} />
+          </button>
+        </div>
       </div>
 
       <div className={`${styles.wrapper} container`}>
